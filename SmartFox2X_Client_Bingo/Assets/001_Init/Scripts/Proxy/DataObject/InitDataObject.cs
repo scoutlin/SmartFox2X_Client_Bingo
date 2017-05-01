@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Init
+using PureMVC.Interfaces;
+using PureMVC.Patterns;
+
+namespace InitNameSpace
 {
     public class InitDataObject
     {

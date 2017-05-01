@@ -5,7 +5,10 @@ using UnityEngine;
 using PureMVC.Patterns;
 using PureMVC.Interfaces;
 
-namespace Init
+using DefineNamespace;
+using BingoFacadeNamespace;
+
+namespace InitNameSpace
 {
     public class Entry : MonoBehaviour
     {
@@ -13,8 +16,8 @@ namespace Init
 
         void Awake()
         {
-             IFacade mFacade = InitFacade.Instance;
-
+            IFacade mFacade = BingoFacade.Instance;
+            
             //RegistProxy
             mFacade.RegisterProxy(new InitProxy(Define.Proxy.InitProxy));
 
@@ -29,7 +32,7 @@ namespace Init
         // Use this for initialization
         void Start()
         {
-            InitFacade.Instance.SendNotification(Define.Notification.InitNotify);
+            BingoFacade.Instance.SendNotification(Define.Notification.InitNotify);
         }
 
         // Update is called once per frame

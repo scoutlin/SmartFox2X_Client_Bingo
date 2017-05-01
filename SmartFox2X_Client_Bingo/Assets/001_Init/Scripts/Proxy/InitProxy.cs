@@ -5,7 +5,7 @@ using UnityEngine;
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 
-namespace Init
+namespace InitNameSpace
 {
     public class InitProxy : Proxy, IProxy
     {

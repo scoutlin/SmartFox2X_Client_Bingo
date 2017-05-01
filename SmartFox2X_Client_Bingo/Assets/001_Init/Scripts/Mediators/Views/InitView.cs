@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using DefineNamespace;
 
-namespace Init
+namespace InitNameSpace
 {
     public class InitView : MonoBehaviour
     {
@@ -23,7 +24,7 @@ namespace Init
         // Use this for initialization
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
@@ -54,7 +55,7 @@ namespace Init
         public void LoadLoadingSceneAddtive()
         {
             mEventSystem.SetActive(false);
-            SceneManager.LoadScene(Init.Define.Scene.LoginScene, LoadSceneMode.Additive);
+            SceneManager.LoadScene(Define.Scene.LoginScene, LoadSceneMode.Additive);  
         }
     }
 }

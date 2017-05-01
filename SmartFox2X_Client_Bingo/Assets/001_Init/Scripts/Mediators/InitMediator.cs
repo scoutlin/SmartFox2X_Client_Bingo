@@ -5,7 +5,9 @@ using UnityEngine;
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 
-namespace Init
+using DefineNamespace;
+
+namespace InitNameSpace
 {
     public class InitMediator : Mediator, IMediator
     {

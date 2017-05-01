@@ -76,19 +76,48 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="PureMVC.DotNET.35">
-      <HintPath>Assets\000_Common\000_pureMVC\PureMVC.DotNET.35.dll</HintPath>
+      <HintPath>Assets\000_Common\000_pureMVC\Dll\PureMVC.DotNET.35.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity">
+      <HintPath>Assets\FacebookSDK\Plugins\Facebook.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity.Settings">
+      <HintPath>Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\001_Init\Scripts\Define\Define.cs" />
+    <Compile Include="Assets\000_Common\000_pureMVC\Scripts\BingoFacade.cs" />
+    <Compile Include="Assets\000_Common\000_pureMVC\Scripts\Define.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Command\MacroCommand\InitMacroCommand.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\InitSimpleCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Entry.cs" />
-    <Compile Include="Assets\001_Init\Scripts\InitFacade.cs" />
-    <Compile Include="Assets\001_Init\Scripts\MacroCommand\InitMacroCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\InitMediator.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\Views\InitView.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\InitDataObject.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\InitProxy.cs" />
-    <Compile Include="Assets\001_Init\Scripts\SimpleCommand\InitSimpleCommand.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Entry.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Mediator\LoginMediator.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Mediator\ViewComponent\LoginView.cs" />
+    <Compile Include="Assets\003_Lobby\Scripts\Entry.cs" />
+    <Compile Include="Assets\003_Lobby\Scripts\Mediator\LobbyMediator.cs" />
+    <Compile Include="Assets\003_Lobby\Scripts\Mediator\ViewComponent\LobbyView.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\ConsoleBase.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\LogView.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\MenuBase.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AccessTokenMenu.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppInvites.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppLinks.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\DialogShare.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GameGroups.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\FacebookSDK\link.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
