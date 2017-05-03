@@ -18,8 +18,9 @@
         {
             //Init
             public const string InitNotify = "InitNotify";
-            
+
             //Login
+            public const string Login_FBLoginNotify = "Login_FBLoginNotify";
 
             //Lobby
         }
@@ -54,7 +55,8 @@
             public const string InitMacroCommand = "InitMacroCommand";
 
             //Login
-
+            public const string FBLoginCommnad = "FBLoginCommnad";
+            public const string FBLogoutCommnad = "FBLogoutCommnad";
             //Lobby
         }
     }

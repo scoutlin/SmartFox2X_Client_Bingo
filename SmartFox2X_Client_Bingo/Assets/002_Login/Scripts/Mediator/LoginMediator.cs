@@ -6,6 +6,8 @@ using PureMVC.Interfaces;
 using PureMVC.Patterns;
 
 using Facebook.Unity;
+using Facebook.Unity.Example;
+using DefineNamespace;
 
 namespace LoginNamespace
 {
@@ -25,79 +27,16 @@ namespace LoginNamespace
 
         }
 
-
-        private void InitCallback()
-        {
-            if(FB.IsInitialized)
-            {
-                // Signal an app activation App Event
-                FB.ActivateApp();
-                // Continue with Facebook SDK
-                // ...
-                var perms = new List<string>() { "public_profile", "email", "user_friends" };
-                FB.LogInWithReadPermissions(perms, AuthCallback);
-            }
-            else
-            {
-                Debug.Log("Failed to Initialize the Facebook SDK");
-            }
-        }
-
-        private void OnHideUnity(bool isGameShown)
-        {
-            if (!isGameShown)
-            {
-                // Pause the game - we will need to hide
-                Time.timeScale = 0;
-            }
-            else
-            {
-                // Resume the game - we're getting focus again
-                Time.timeScale = 1;
-            }
-        }
-
-        private void AuthCallback(ILoginResult result)
-        {
-            if (FB.IsLoggedIn)
-            {
-                // AccessToken class will have session details
-                var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-                // Print current access token's User ID
-                Debug.Log(aToken.UserId);
-                // Print current access token's granted permissions
-                foreach (string perm in aToken.Permissions)
-                {
-                    Debug.Log(perm);
-                }
-            }
-            else
-            {
-                Debug.Log("User cancelled login");
-            }
-        }
-
-
         public void OnFBLoginClick()
         {
             Debug.Log("LoginMediator - OnFBLoginClick");
+            SendNotification(Define.Command.FBLoginCommnad);
+        }
 
-            if(!FB.IsInitialized)
-            {
-                // Initialize the Facebook SDK
-                FB.Init(InitCallback, OnHideUnity);
-            }
-            else
-            {
-                // Already initialized, signal an app activation App Event
-                FB.ActivateApp();
-                // Continue with Facebook SDK
-                // ...
-                var perms = new List<string>() { "public_profile", "email", "user_friends" };
-                FB.LogInWithReadPermissions(perms, AuthCallback);
-            }
-
-
+        public void OnFBLogoutClick()
+        {
+            Debug.Log("LoginMediator - OnFBLogoutClick");
+            SendNotification(Define.Command.FBLogoutCommnad);
         }
 
         public void OnDonateClick()
@@ -112,16 +51,33 @@ namespace LoginNamespace
         public override IList<string> ListNotificationInterests()
         {
             IList<string> list = new List<string>();
-            //list.Add(Init.Define.Notification.InitNotify);
+            list.Add(Define.Notification.Login_FBLoginNotify);
             return list;
         }
 
-        public override void HandleNotification(INotification note)
+        public override void HandleNotification(INotification notify)
         {
-            switch (note.Name)
+            switch (notify.Name)
             {
+                default:
+                    {
 
+                    }
+                    break;
+
+                case Define.Notification.Login_FBLoginNotify:
+                    {
+                        Login_FBLogin(notify.Body);
+                    }
+                    break;
             }
+        }
+
+
+
+        private void Login_FBLogin(object sprite)
+        {
+            mLoginView.Login_FBLogin((Sprite)sprite);
         }
     }
 }

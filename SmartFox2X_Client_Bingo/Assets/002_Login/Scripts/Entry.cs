@@ -25,7 +25,8 @@ namespace LoginNamespace
             mFacade.RegisterMediator(new LoginMediator(mLoginView, Define.Mediator.LoginMediator));
 
             //RegistCommand
-            //mFacade.RegisterCommand(Define.Command.InitSimpleCommnad, typeof(InitSimpleCommand));
+            mFacade.RegisterCommand(Define.Command.FBLoginCommnad, typeof(FBLoginCommnad));
+            mFacade.RegisterCommand(Define.Command.FBLogoutCommnad, typeof(FBLogoutCommnad));
             //mFacade.RegisterCommand(Define.Command.InitMacroCommand, typeof(MacroCommand));
         }
 

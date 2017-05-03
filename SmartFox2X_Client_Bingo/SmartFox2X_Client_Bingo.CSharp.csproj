@@ -95,6 +95,8 @@
     <Compile Include="Assets\001_Init\Scripts\Mediators\Views\InitView.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\InitDataObject.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\InitProxy.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\FBLoginCommnad.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\FBLogoutCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Entry.cs" />
     <Compile Include="Assets\002_Login\Scripts\Mediator\LoginMediator.cs" />
     <Compile Include="Assets\002_Login\Scripts\Mediator\ViewComponent\LoginView.cs" />
