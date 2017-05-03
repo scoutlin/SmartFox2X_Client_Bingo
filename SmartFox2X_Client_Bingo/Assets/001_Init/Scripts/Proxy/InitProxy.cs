@@ -14,6 +14,7 @@ namespace InitNameSpace
         public InitProxy(string name) : base(name, new InitDataObject())
         {
             mInitDataObject = (InitDataObject)Data;
+            
         }
     }
 }

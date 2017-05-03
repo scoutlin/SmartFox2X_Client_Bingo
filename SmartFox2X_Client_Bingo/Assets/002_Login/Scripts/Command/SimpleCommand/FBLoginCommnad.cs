@@ -11,14 +11,8 @@ using DefineNamespace;
 
 public class FBLoginCommnad : SimpleCommand, ICommand
 {
-    private LoginMediator mLoginMediator = null;
-
     public override void Execute(INotification notification)
     {
-        //Get Instance
-        mLoginMediator = (LoginMediator)BingoFacadeNamespace.BingoFacade.Instance.RetrieveMediator(Define.Mediator.LoginMediator);
-
-        
         FBLogin();
     }
 

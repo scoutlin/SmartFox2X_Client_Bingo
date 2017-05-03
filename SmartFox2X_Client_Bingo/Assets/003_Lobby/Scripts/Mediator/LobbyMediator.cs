@@ -27,7 +27,11 @@ namespace LobbyNamespace
         {
             switch (note.Name)
             {
+                default:
+                    {
 
+                    }
+                    break;
             }
         }
     }
