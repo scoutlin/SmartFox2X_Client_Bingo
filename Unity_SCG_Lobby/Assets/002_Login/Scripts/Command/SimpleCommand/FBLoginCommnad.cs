@@ -52,9 +52,13 @@ public class FBLoginCommnad : SimpleCommand, ICommand
         if (FB.IsLoggedIn)
         {
             // AccessToken class will have session details
-            var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
+            var aToken = AccessToken.CurrentAccessToken;
             // Print current access token's User ID
-            Debug.Log(aToken.UserId);
+            Debug.Log("UserID: " + aToken.UserId);
+            Debug.Log("ExpirationTime: " + aToken.ExpirationTime);
+            Debug.Log("LastRefresh:" + aToken.LastRefresh);
+            Debug.Log("TokenString: " + aToken.TokenString);
+
             // Print current access token's granted permissions
             foreach (string perm in aToken.Permissions)
             {

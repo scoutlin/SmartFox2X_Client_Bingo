@@ -9,6 +9,18 @@ namespace InitNameSpace
 {
     public class InitDataObject
     {
+        private string filePath = Application.persistentDataPath + "/settings.txt";
 
+
+
+        public void WriteSettingData()
+        {
+
+        }
+
+        public void ReadSettingData()
+        {
+
+        }
     }
 }
