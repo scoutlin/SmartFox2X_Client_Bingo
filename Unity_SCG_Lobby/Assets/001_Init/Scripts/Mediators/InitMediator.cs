@@ -34,7 +34,7 @@ namespace InitNameSpace
             {
                 case Define.Notification.InitNotify:
                     {
-                        mInitView.StartRunLoadingBar();
+                        //mInitView.StartRunLoadingBar();
                     }
                     break;
             }
