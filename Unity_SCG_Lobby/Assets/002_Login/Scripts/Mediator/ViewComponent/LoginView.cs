@@ -56,7 +56,7 @@ namespace LoginNamespace
             mEventSystem.SetActive(false);
             mCamera.SetActive(false);
 
-            SceneManager.LoadScene(Define.Scene.LobbyScene, LoadSceneMode.Additive);
+            SceneManager.LoadScene(Define.Scene.LobbySceneLoader, LoadSceneMode.Additive);
         }
 
         public void OnFBLoginClick()

@@ -8,10 +8,10 @@
             public const string InitScene = "InitScene";
 
             //Login
-            public const string LoginScene = "LoginScene";
+            public const string LoginSceneLoader = "LoginSceneLoader";
 
             //Lobby
-            public const string LobbyScene = "LobbyScene";
+            public const string LobbySceneLoader = "LobbySceneLoader";
         }
 
         public class Notification

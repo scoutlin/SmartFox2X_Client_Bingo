@@ -58,7 +58,7 @@ namespace InitNamespace
         public void LoadLoadingSceneAddtive()
         {
             mEventSystem.SetActive(false);
-            SceneManager.LoadScene(Define.Scene.LoginScene, LoadSceneMode.Additive);  
+            SceneManager.LoadScene(Define.Scene.LoginSceneLoader, LoadSceneMode.Additive);  
         }
     }
 }
