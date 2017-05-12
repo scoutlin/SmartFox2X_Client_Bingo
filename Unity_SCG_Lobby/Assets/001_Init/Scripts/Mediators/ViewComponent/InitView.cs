@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 using DefineNamespace;
 
-namespace InitNameSpace
+namespace InitNamespace
 {
     public class InitView : MonoBehaviour
     {
@@ -35,7 +35,10 @@ namespace InitNameSpace
 
         public void StartRunLoadingBar()
         {
-            StartCoroutine(Coroutine_DoProgress());
+            if (this.isActiveAndEnabled)
+            {
+                StartCoroutine(Coroutine_DoProgress());
+            }
         }
 
         IEnumerator Coroutine_DoProgress()

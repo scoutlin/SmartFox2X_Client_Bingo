@@ -8,11 +8,12 @@ using PureMVC.Interfaces;
 using DefineNamespace;
 using BingoFacadeNamespace;
 
-namespace InitNameSpace
+namespace InitNamespace
 {
     public class Entry : MonoBehaviour
     {
         public InitView mInitView;
+        public InitTestView mInitTestView;
 
         void Awake()
         {
@@ -20,13 +21,17 @@ namespace InitNameSpace
             
             //RegistProxy
             mFacade.RegisterProxy(new InitProxy(Define.Proxy.InitProxy));
+            mFacade.RegisterProxy(new RESTFulTestProxy(Define.Proxy.RESTFulTestProxy));
 
             //RegistMediator
             mFacade.RegisterMediator(new InitMediator(mInitView, Define.Mediator.InitMediator));
+            mFacade.RegisterMediator(new InitTestMediator(mInitTestView, Define.Mediator.InitTestMediator));
 
             //RegistCommand
             mFacade.RegisterCommand(Define.Command.InitSimpleCommnad, typeof(InitSimpleCommand));
             mFacade.RegisterCommand(Define.Command.InitMacroCommand, typeof(MacroCommand));
+
+            mFacade.RegisterCommand(Define.Command.InitTestSimpleCommnad, typeof(RESTFulTestCommand));
         }
 
         // Use this for initialization

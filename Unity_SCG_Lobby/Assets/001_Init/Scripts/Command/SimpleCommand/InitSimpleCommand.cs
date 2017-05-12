@@ -5,7 +5,7 @@ using UnityEngine;
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 
-namespace InitNameSpace
+namespace InitNamespace
 {
     public class InitSimpleCommand : SimpleCommand, ICommand
     {

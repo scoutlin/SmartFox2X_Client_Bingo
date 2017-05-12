@@ -16,6 +16,9 @@
 
         public class Notification
         {
+            //RESTFul
+            public const string RESTFulTestNotify = "RESTFulTestNotify";
+
             //Init
             public const string InitNotify = "InitNotify";
 
@@ -29,6 +32,7 @@
         {
             //Init
             public const string InitProxy = "InitProxy";
+            public const string RESTFulTestProxy = "RESTFulTestProxy";
 
             //Login
             //public const string InitProxy = "Login.InitProxy";
@@ -39,6 +43,7 @@
         public class Mediator
         {
             //Init
+            public const string InitTestMediator = "InitTestMediator";
             public const string InitMediator = "InitMediator";
 
             //Login
@@ -53,6 +58,7 @@
             //Init
             public const string InitSimpleCommnad = "InitSimpleCommnad";
             public const string InitMacroCommand = "InitMacroCommand";
+            public const string InitTestSimpleCommnad = "InitTestSimpleCommnad";
 
             //Login
             public const string FBLoginCommnad = "FBLoginCommnad";

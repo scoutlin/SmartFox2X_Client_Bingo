@@ -87,12 +87,12 @@ namespace RESTFulNamespace
         }
 
         //POST WebClient (Also now legacy)
-        private string WebClient_POST(string webSite, string json)
+        public string WebClient_POST(string webSite, string field , string data)
         {
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
-                values["json"] = json;
+                values[field] = data;
                 //values["thing2"] = "world";
 
                 var response = client.UploadValues(webSite, values);
@@ -130,7 +130,7 @@ namespace RESTFulNamespace
         {
             string json = JsonUtility.ToJson(mTestPOST_JOSN);
             string jsonReplyFromWebsite = string.Empty;
-            jsonReplyFromWebsite = WebClient_POST(webSite, json);
+            jsonReplyFromWebsite = WebClient_POST(webSite, "json", json);
 
             RESP_TestPOST_JOSN mRESP_TestPOST_JOSN = JsonUtility.FromJson<RESP_TestPOST_JOSN>(jsonReplyFromWebsite);
 

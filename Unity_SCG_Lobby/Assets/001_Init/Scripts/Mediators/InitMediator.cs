@@ -7,7 +7,7 @@ using PureMVC.Patterns;
 
 using DefineNamespace;
 
-namespace InitNameSpace
+namespace InitNamespace
 {
     public class InitMediator : Mediator, IMediator
     {
@@ -34,7 +34,7 @@ namespace InitNameSpace
             {
                 case Define.Notification.InitNotify:
                     {
-                        //mInitView.StartRunLoadingBar();
+                        mInitView.StartRunLoadingBar();
                     }
                     break;
             }
