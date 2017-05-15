@@ -17,7 +17,6 @@
         public class Notification
         {
             //RESTFul
-            public const string RESTFulTestNotify = "RESTFulTestNotify";
 
             //Init
             public const string InitNotify = "InitNotify";
@@ -31,8 +30,9 @@
         public class Proxy
         {
             //Init
-            public const string InitProxy = "InitProxy";
+            public const string SettingDataProxy = "SettingDataProxy";
             public const string RESTFulTestProxy = "RESTFulTestProxy";
+            public const string SmartFox2XClientProxy = "SmartFox2XClientProxy";
 
             //Login
             //public const string InitProxy = "Login.InitProxy";
@@ -58,7 +58,8 @@
             //Init
             public const string InitSimpleCommnad = "InitSimpleCommnad";
             public const string InitMacroCommand = "InitMacroCommand";
-            public const string InitTestSimpleCommnad = "InitTestSimpleCommnad";
+            public const string TestRESTFulCommand = "TestRESTFulCommand";
+            public const string TestReadSettingFileCommnad = "TestReadSettingFileCommnad";
 
             //Login
             public const string FBLoginCommnad = "FBLoginCommnad";

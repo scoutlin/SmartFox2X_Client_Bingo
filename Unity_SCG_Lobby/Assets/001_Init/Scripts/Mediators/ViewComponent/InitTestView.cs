@@ -5,6 +5,8 @@ namespace InitNamespace
 {
     public class InitTestView : MonoBehaviour
     {
+        private InitTestMediator mInitTestMediator;
+
         void Awake()
         {
 
@@ -22,10 +24,17 @@ namespace InitNamespace
 
         }
 
-        #region ButtonEvent
-        public void OnConnectToServerButtonClicked()
+        public void SetMediatorRef(InitTestMediator mInitTestMediator)
         {
-            Debug.Log("OnConnectToServerButtonClicked");
+            this.mInitTestMediator = mInitTestMediator;
+        }
+
+
+
+        #region ButtonEvent
+        public void OnConnectToServerButtonClick()
+        {
+            Debug.Log("OnConnectToServerButtonClick");
         }
 
         public void OnDisconnectButton()
@@ -33,22 +42,30 @@ namespace InitNamespace
             Debug.Log("OnDisconnectButton");
         }
 
-        public void OnSwitchToLoginButtonClicked()
+        public void OnSwitchToLoginButtonClick()
         {
-            Debug.Log("OnSwitchToLoginButtonClicked");
+            Debug.Log("OnSwitchToLoginButtonClick");
         }
 
-        public void OnSendInitPacketButtonClicket()
+        public void OnSendInitPacketButtonClick()
         {
-            Debug.Log("OnSendInitPacketButtonClicket");
+            Debug.Log("OnSendInitPacketButtonClick");
         }
 
-        public void OnRESTFulFuckWebsiteClicked()
+        public void OnRESTFulFuckWebsiteClick()
         {
-            BingoFacadeNamespace.BingoFacade.Instance.SendNotification(Define.Notification.RESTFulTestNotify);
+            mInitTestMediator.OnRESTFulFuckWebsiteClick();
+            Debug.Log("OnRESTFulFuckWebsiteClick");
         }
 
+        public void OnReadSettingFileClick()
+        {
+            Debug.Log("OnReadSettingFileClick");
+            mInitTestMediator.OnReadSettingFileClick();
+        }
         #endregion
+
+
 
         #region Methold
         public void SetLoadingBarValue(float value)

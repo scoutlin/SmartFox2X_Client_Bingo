@@ -18,7 +18,7 @@ namespace InitNamespace
 
         public void RESTFulTest()
         {
-            mRESTFulTestDataObject.RESTFulTest();
+            mRESTFulTestDataObject.TestRESTFul();
         }
     }
 }

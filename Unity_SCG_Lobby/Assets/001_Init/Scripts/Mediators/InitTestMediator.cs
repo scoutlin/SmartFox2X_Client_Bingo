@@ -14,12 +14,49 @@ namespace InitNamespace
         public InitTestMediator(InitTestView mInitTestView, string name) : base(name, mInitTestView)
 		{
             this.mInitTestView = ((InitTestView)m_viewComponent);
+            this.mInitTestView.SetMediatorRef(this);
         }
+
+        #region EventFromView
+        public void OnConnectToServerButtonClick()
+        {
+            Debug.Log("OnConnectToServerButtonClick");
+        }
+
+        public void OnDisconnectButton()
+        {
+            Debug.Log("OnDisconnectButton");
+        }
+
+        public void OnSwitchToLoginButtonClick()
+        {
+            Debug.Log("OnSwitchToLoginButtonClick");
+        }
+
+        public void OnSendInitPacketButtonClick()
+        {
+            Debug.Log("OnSendInitPacketButtonClick");
+        }
+
+        public void OnRESTFulFuckWebsiteClick()
+        {
+            SendNotification(Define.Command.TestRESTFulCommand);
+            Debug.Log("OnRESTFulFuckWebsiteClick");
+        }
+
+        public void OnReadSettingFileClick()
+        {
+            SendNotification(Define.Command.TestReadSettingFileCommnad);
+            Debug.Log("OnReadSettingFileClick");
+        }
+        #endregion
+
+
 
         public override IList<string> ListNotificationInterests()
         {
             IList<string> list = new List<string>();
-            list.Add(Define.Notification.RESTFulTestNotify);
+            //list.Add(Define.Notification.TestRESTFulNotify);
             return list;
         }
 
@@ -27,11 +64,16 @@ namespace InitNamespace
         {
             switch (note.Name)
             {
-                case Define.Notification.RESTFulTestNotify:
-                   {
-                        SendNotification(Define.Command.InitTestSimpleCommnad);
-                   }
-                   break;
+                default:
+                    {
+
+                    }
+                    break;
+                //case Define.Notification.TestRESTFulNotify:
+                //   {
+                //        
+                //   }
+                //   break;
             }
         }
     }

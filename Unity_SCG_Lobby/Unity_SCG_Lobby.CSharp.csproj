@@ -78,6 +78,9 @@
     <Reference Include="PureMVC.DotNET.35">
       <HintPath>Assets\000_Common\000_pureMVC\Dll\PureMVC.DotNET.35.dll</HintPath>
     </Reference>
+    <Reference Include="SmartFox2XUnity">
+      <HintPath>Assets\000_Common\001_SmartFoxAPI\Unity\SmartFox2XUnity.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity">
       <HintPath>Assets\FacebookSDK\Plugins\Facebook.Unity.dll</HintPath>
     </Reference>
@@ -88,19 +91,21 @@
   <ItemGroup>
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\BingoFacade.cs" />
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\Define.cs" />
-    <Compile Include="Assets\000_Common\002_RESTFul\RESTFul.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\MacroCommand\InitMacroCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\InitSimpleCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\RESTFulTestCommand.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\TestReadSettingFileCommnad.cs" />
     <Compile Include="Assets\001_Init\Scripts\Entry.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\InitMediator.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\InitTestMediator.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\ViewComponent\InitTestView.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\ViewComponent\InitView.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\InitDataObject.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\RESTFulTestDataObject.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\InitProxy.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\SettingDataDataObject.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\SmartFox2XClientDataObject.cs" />
     <Compile Include="Assets\001_Init\Scripts\Proxy\RESTFulTestProxy.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Proxy\SettingDataProxy.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Proxy\SmartFox2XClientProxy.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\FBLoginCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\FBLogoutCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Entry.cs" />

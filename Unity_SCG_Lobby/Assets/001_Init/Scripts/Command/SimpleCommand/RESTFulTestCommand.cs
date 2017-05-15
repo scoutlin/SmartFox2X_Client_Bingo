@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace InitNamespace
 {
-    public class RESTFulTestCommand : SimpleCommand, ICommand
+    public class TestRESTFulCommand : SimpleCommand, ICommand
     {
         private RESTFulTestProxy mRESTFulTestProxy;
 

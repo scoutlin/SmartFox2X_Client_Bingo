@@ -120,6 +120,9 @@
     <Reference Include="PureMVC.DotNET.35">
       <HintPath>Assets\000_Common\000_pureMVC\Dll\PureMVC.DotNET.35.dll</HintPath>
     </Reference>
+    <Reference Include="SmartFox2XUnity">
+      <HintPath>Assets\000_Common\001_SmartFoxAPI\Unity\SmartFox2XUnity.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity">
       <HintPath>Assets\FacebookSDK\Plugins\Facebook.Unity.dll</HintPath>
     </Reference>
