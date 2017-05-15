@@ -20,6 +20,8 @@
 
             //Init
             public const string InitNotify = "InitNotify";
+            public const string LoadLoginNotify = "LoadLoginNotify";
+            public const string LoadLobbyNotify = "LoadLobbyNotify";
 
             //Login
             public const string Login_FBLoginNotify = "Login_FBLoginNotify";
@@ -60,6 +62,7 @@
             public const string InitMacroCommand = "InitMacroCommand";
             public const string TestRESTFulCommand = "TestRESTFulCommand";
             public const string TestReadSettingFileCommnad = "TestReadSettingFileCommnad";
+            public const string CheckSettingDataCommand = "CheckSettingDataCommand";
 
             //Login
             public const string FBLoginCommnad = "FBLoginCommnad";

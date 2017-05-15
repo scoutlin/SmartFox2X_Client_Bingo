@@ -92,8 +92,9 @@
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\BingoFacade.cs" />
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\Define.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\MacroCommand\InitMacroCommand.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\CheckSettingDataCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\InitSimpleCommand.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\RESTFulTestCommand.cs" />
+    <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\TestRESTFulCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\TestReadSettingFileCommnad.cs" />
     <Compile Include="Assets\001_Init\Scripts\Entry.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\InitMediator.cs" />

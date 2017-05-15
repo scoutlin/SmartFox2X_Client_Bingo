@@ -18,7 +18,14 @@ namespace InitNamespace
         }
 
 
+        public bool CheckSettingFileExist()
+        {
+            bool isFileExist;
 
+            isFileExist = mInitSettingDataDataObject.CheckSettingFileExist();
+
+            return isFileExist;
+        }
 
         public SettingDataDataObject.InitSettingData ReadSettingFile()
         {

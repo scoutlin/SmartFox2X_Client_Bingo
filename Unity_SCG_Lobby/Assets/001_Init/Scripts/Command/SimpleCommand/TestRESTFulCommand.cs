@@ -9,11 +9,11 @@ namespace InitNamespace
 {
     public class TestRESTFulCommand : SimpleCommand, ICommand
     {
-        private RESTFulTestProxy mRESTFulTestProxy;
+        private TestRESTFulProxy mRESTFulTestProxy;
 
         public override void Execute(INotification notification)
         {
-            mRESTFulTestProxy = (RESTFulTestProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.RESTFulTestProxy);
+            mRESTFulTestProxy = (TestRESTFulProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.RESTFulTestProxy);
 
             mRESTFulTestProxy.RESTFulTest();
         }

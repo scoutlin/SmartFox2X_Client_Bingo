@@ -21,7 +21,7 @@ namespace InitNamespace
             
             //RegistProxy
             mFacade.RegisterProxy(new SettingDataProxy(Define.Proxy.SettingDataProxy));
-            mFacade.RegisterProxy(new RESTFulTestProxy(Define.Proxy.RESTFulTestProxy));
+            mFacade.RegisterProxy(new TestRESTFulProxy(Define.Proxy.RESTFulTestProxy));
             mFacade.RegisterProxy(new SmartFox2XClientProxy(Define.Proxy.SmartFox2XClientProxy));
 
             //RegistMediator
@@ -34,6 +34,7 @@ namespace InitNamespace
 
             mFacade.RegisterCommand(Define.Command.TestRESTFulCommand, typeof(TestRESTFulCommand));
             mFacade.RegisterCommand(Define.Command.TestReadSettingFileCommnad, typeof(TestReadSettingFileCommnad));
+            mFacade.RegisterCommand(Define.Command.CheckSettingDataCommand, typeof(CheckSettingDataCommand));
         }
 
         // Use this for initialization

@@ -25,6 +25,8 @@ namespace InitNamespace
         {
             IList<string> list = new List<string>();
             list.Add(Define.Notification.InitNotify);
+            list.Add(Define.Notification.LoadLoginNotify);
+            list.Add(Define.Notification.LoadLobbyNotify);
             return list;
         }
 
@@ -35,6 +37,18 @@ namespace InitNamespace
                 case Define.Notification.InitNotify:
                     {
                         mInitView.StartRunLoadingBar();
+                    }
+                    break;
+
+                case Define.Notification.LoadLoginNotify:
+                    {
+                        mInitView.LoadLoadingSceneAddtive();
+                    }
+                    break;
+
+                case Define.Notification.LoadLobbyNotify:
+                    {
+                        mInitView.LoadLobbySceneAddtive();
                     }
                     break;
             }

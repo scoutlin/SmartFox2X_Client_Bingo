@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace InitNamespace
 {
-    public class RESTFulTestProxy : Proxy, IProxy
+    public class TestRESTFulProxy : Proxy, IProxy
     {
         private RESTFulTestDataObject mRESTFulTestDataObject;
 
-        public RESTFulTestProxy(string name) : base(name, new RESTFulTestDataObject())
+        public TestRESTFulProxy(string name) : base(name, new RESTFulTestDataObject())
         {
             mRESTFulTestDataObject = (RESTFulTestDataObject)Data;
 
