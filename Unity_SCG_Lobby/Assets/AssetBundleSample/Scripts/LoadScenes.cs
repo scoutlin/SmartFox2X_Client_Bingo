@@ -35,7 +35,8 @@ public class LoadScenes : MonoBehaviour
 		//AssetBundleManager.SetSourceAssetBundleURL("file:///D:/GitHub/Unity/Unity_SCG_Lobby/Unity_SCG_Lobby/AssetBundles/");
         // Or customize the URL based on your deployment or configuration
         //Test OK. The Website should build on AssetBundle Folder
-		AssetBundleManager.SetSourceAssetBundleURL("http://localhost:7888/AssetBundles/");
+		//AssetBundleManager.SetSourceAssetBundleURL("http://localhost:7888/AssetBundles/");
+        AssetBundleManager.SetSourceAssetBundleURL("http://192.168.0.102:7888/AssetBundles/");
 #endif
 
         // Initialize AssetBundleManifest which loads the AssetBundleManifest object.

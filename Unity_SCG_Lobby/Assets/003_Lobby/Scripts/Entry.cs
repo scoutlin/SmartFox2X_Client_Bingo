@@ -22,7 +22,7 @@ namespace LobbyNamespace
             //mFacade.RegisterProxy(new InitProxy(Define.Proxy.InitProxy));
 
             //RegistMediator
-            mFacade.RegisterMediator(new LobbyMediator(mLobbyView, Define.Mediator.LobbyMediator));
+            mFacade.RegisterMediator(new Lobby_LobbyMediator(mLobbyView, Define.Mediator.Lobby_LobbyMediator));
 
             //RegistCommand
             //mFacade.RegisterCommand(Define.Command.InitSimpleCommnad, typeof(InitSimpleCommand));

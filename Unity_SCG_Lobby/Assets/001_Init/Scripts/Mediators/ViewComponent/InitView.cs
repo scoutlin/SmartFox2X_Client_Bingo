@@ -52,14 +52,14 @@ namespace InitNamespace
         {
             while (progress < 100)
             {
-                progress++;
+                progress = progress + 5;
                 mLoadingBar.value = progress;
                 mLoadingBarValue.text = progress.ToString() + "%";
                 yield return new WaitForSeconds(0.05f);
             }
 
 
-            BingoFacade.Instance.SendNotification(Define.Command.CheckSettingDataCommand);
+            BingoFacade.Instance.SendNotification(Define.Command.Init_CheckSettingDataCommand);
         }
 
 
@@ -69,30 +69,30 @@ namespace InitNamespace
             SceneManager.LoadScene(Define.Scene.LoginSceneLoader, LoadSceneMode.Additive);  
         }
 
-        public void LoadLobbySceneAddtive()
-        {
-            //Let bingo ball light 1 sec than goto lobby scene
-            mEventSystem.SetActive(false);
+        //public void LoadLobbySceneAddtive()
+        //{
+        //    //Let bingo ball light 1 sec than goto lobby scene
+        //    mEventSystem.SetActive(false);
 
-            StartCoroutine(Coroutine_LoadLobbySceneAddtive());
-        }
+        //    StartCoroutine(Coroutine_LoadLobbySceneAddtive());
+        //}
 
-        IEnumerator Coroutine_LoadLobbySceneAddtive()
-        {
-            LightAllBingoBall();
+        //IEnumerator Coroutine_LoadLobbySceneAddtive()
+        //{
+        //    LightAllBingoBall();
 
-            yield return new WaitForSeconds(1f);
+        //    yield return new WaitForSeconds(1f);
 
-            SceneManager.LoadScene(Define.Scene.LobbySceneLoader, LoadSceneMode.Additive);
-        }
+        //    SceneManager.LoadScene(Define.Scene.LobbySceneLoader, LoadSceneMode.Additive);
+        //}
 
-        private void LightAllBingoBall()
-        {
-            bBall.color = new Color(0 / 255f,   65/255f,    255 / 255f);
-            iBall.color = new Color(255 / 255f, 0 / 255f,   0 / 255f);
-            nBall.color = new Color(99 / 255f,  99 / 255f,  99 / 255f);
-            gBall.color = new Color(0 / 255f,   255 / 255f, 33 / 255f);
-            oBall.color = new Color(255 / 255f, 255 / 255f, 0 / 255f);
-        }
+        //private void LightAllBingoBall()
+        //{
+        //    bBall.color = new Color(0 / 255f,   65/255f,    255 / 255f);
+        //    iBall.color = new Color(255 / 255f, 0 / 255f,   0 / 255f);
+        //    nBall.color = new Color(99 / 255f,  99 / 255f,  99 / 255f);
+        //    gBall.color = new Color(0 / 255f,   255 / 255f, 33 / 255f);
+        //    oBall.color = new Color(255 / 255f, 255 / 255f, 0 / 255f);
+        //}
     }
 }

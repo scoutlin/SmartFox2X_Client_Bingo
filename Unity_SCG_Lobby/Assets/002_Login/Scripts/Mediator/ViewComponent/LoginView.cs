@@ -13,13 +13,14 @@ namespace LoginNamespace
         public GameObject mCamera;
         public GameObject mEventSystem;
         public Image mUserProfilePicture;
-        public GameObject mLoginButton;
+        public GameObject mQuickLoginButton;
         public GameObject mFBLoginButton;
         public GameObject mFBLogoutButton;
         public GameObject mDonateButton;
         public Text mDonateButtonText;
+        public GameObject mLoginingText;
 
-        private LoginMediator mLoginMediator;
+        private Login_LoginMediator mLoginMediator;
 
     
 
@@ -40,23 +41,16 @@ namespace LoginNamespace
 
         }
 
-        public void SetMediatorRef(LoginMediator mLoginMediator)
+        public void SetMediatorRef(Login_LoginMediator mLoginMediator)
         {
             this.mLoginMediator = mLoginMediator;
         }
 
         #region UserInput
-        public void OnLoginClick()
+        public void OnQuickLoginClick()
         {
             mLoginMediator.OnLoginClick();
             Debug.Log("OnLoginClick");
-
-
-            //For Test
-            mEventSystem.SetActive(false);
-            mCamera.SetActive(false);
-
-            SceneManager.LoadScene(Define.Scene.LobbySceneLoader, LoadSceneMode.Additive);
         }
 
         public void OnFBLoginClick()
@@ -75,7 +69,7 @@ namespace LoginNamespace
             mLoginMediator.OnDonateClick();
             Debug.Log("OnDonateClick");
         }
-
+        #endregion
 
         IEnumerator CorutineCountDownDonate(int startNumber)
         {
@@ -94,9 +88,9 @@ namespace LoginNamespace
         }
 
 
-        public void SetLoginButtonActice(bool isActive)
+        public void SetQuickLoginButtonActice(bool isActive)
         {
-            mLoginButton.SetActive(isActive);
+            mQuickLoginButton.SetActive(isActive);
         }
 
         public void SetFBLoginButtonActive(bool isActive)
@@ -107,6 +101,11 @@ namespace LoginNamespace
         public void SetFBLogoutButtonActive(bool isActive)
         {
             mFBLogoutButton.SetActive(isActive);
+        }
+
+        public void SetLoginingTextActive(bool isActive)
+        {
+            mLoginingText.SetActive(isActive);
         }
 
         public void CountDownDonate(int startNumber)
@@ -120,13 +119,15 @@ namespace LoginNamespace
 
             mUserProfilePicture.enabled = true;
 
-            SetLoginButtonActice(false);
+            SetQuickLoginButtonActice(false);
             SetFBLoginButtonActive(false);
             //SetFBLogoutButtonActive(false);
 
             CountDownDonate(5);
         }
 
-        #endregion
+
+
+
     }
 }

@@ -5,7 +5,7 @@ namespace InitNamespace
 {
     public class InitTestView : MonoBehaviour
     {
-        private InitTestMediator mInitTestMediator;
+        private Init_TestMediator mInitTestMediator;
 
         void Awake()
         {
@@ -24,7 +24,7 @@ namespace InitNamespace
 
         }
 
-        public void SetMediatorRef(InitTestMediator mInitTestMediator)
+        public void SetMediatorRef(Init_TestMediator mInitTestMediator)
         {
             this.mInitTestMediator = mInitTestMediator;
         }

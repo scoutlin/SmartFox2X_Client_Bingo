@@ -17,7 +17,7 @@ namespace InitNamespace
         }
 
         private string filePath = Application.persistentDataPath + "/settings.txt";
-
+        private bool isFileExist = false;
 
 
         //Example
@@ -26,10 +26,13 @@ namespace InitNamespace
             System.IO.File.WriteAllBytes(filename, texture.EncodeToPNG());
         }
 
+        public bool GetIsFileExist()
+        {
+            return isFileExist;
+        }
+
         public bool CheckSettingFileExist()
         {
-            bool isFileExist;
-
             isFileExist = File.Exists(filePath);
 
             return isFileExist;
