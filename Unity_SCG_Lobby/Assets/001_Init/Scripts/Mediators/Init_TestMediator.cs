@@ -44,9 +44,15 @@ namespace InitNamespace
             Debug.Log("OnRESTFulFuckWebsiteClick");
         }
 
-        public void OnReadSettingFileClick()
+        public void OnTestWriteReadFileClick()
         {
-            SendNotification(Define.Command.Init_TestReadSettingFileCommnad);
+            SendNotification(Define.Command.Init_TestPersistentDataPathCommand);
+            Debug.Log("OnTestWriteReadFileClick");
+        }
+
+        public void OnTestPlayerPrefsClick()
+        {
+            SendNotification(Define.Command.Init_TestPlayerPrefsCommnad);
             Debug.Log("OnReadSettingFileClick");
         }
         #endregion

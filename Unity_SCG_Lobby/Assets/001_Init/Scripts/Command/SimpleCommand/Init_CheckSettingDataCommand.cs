@@ -12,20 +12,18 @@ namespace InitNamespace
 {
     public class Init_CheckSettingDataCommand : SimpleCommand, ICommand
     {
-        public Init_SettingDataProxy mSettingDataProxy;
+        public Init_PlayerPrefsProxy mSettingDataProxy;
 
-        private bool isSettingFileExist = false;
-        private bool isFBLogin = false;
+        private string tokenFromServer = string.Empty;
 
 
         public override void Execute(INotification notification)
         {
-            mSettingDataProxy = (Init_SettingDataProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_SettingDataProxy);
+            //mSettingDataProxy = (Init_SettingDataProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_SettingDataProxy);
 
-            isSettingFileExist = mSettingDataProxy.CheckSettingFileExist();
+            //tokenFromServer = mSettingDataProxy.Get_TokenFromServer();
 
-
-            SendNotification(Define.Notification.Init_LoadLoginNotify);  
+            SendNotification(Define.Notification.Init_LoadLoginNotify);
         }
     }
 }

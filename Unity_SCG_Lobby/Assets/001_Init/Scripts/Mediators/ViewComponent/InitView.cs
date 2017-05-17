@@ -69,6 +69,7 @@ namespace InitNamespace
             SceneManager.LoadScene(Define.Scene.LoginSceneLoader, LoadSceneMode.Additive);  
         }
 
+
         //public void LoadLobbySceneAddtive()
         //{
         //    //Let bingo ball light 1 sec than goto lobby scene

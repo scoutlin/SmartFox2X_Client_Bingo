@@ -43,11 +43,15 @@ namespace AssetBundles
 				Debug.LogError("There is no scene with name \"" + levelName + "\" in " + assetBundleName);
 				return;
 			}
-			
-			if (isAdditive)
-				m_Operation = UnityEditor.EditorApplication.LoadLevelAdditiveAsyncInPlayMode(levelPaths[0]);
-			else
-				m_Operation = UnityEditor.EditorApplication.LoadLevelAsyncInPlayMode(levelPaths[0]);
+
+            if (isAdditive)
+            {
+                m_Operation = UnityEditor.EditorApplication.LoadLevelAdditiveAsyncInPlayMode(levelPaths[0]);
+            }
+            else
+            {
+                m_Operation = UnityEditor.EditorApplication.LoadLevelAsyncInPlayMode(levelPaths[0]);
+            }
 		}
 		
 		public override bool Update ()
@@ -83,16 +87,23 @@ namespace AssetBundles
 				return false;
 			
 			LoadedAssetBundle bundle = AssetBundleManager.GetLoadedAssetBundle (m_AssetBundleName, out m_DownloadingError);
-			if (bundle != null)
-			{
-				if (m_IsAdditive)
-					m_Request = Application.LoadLevelAdditiveAsync (m_LevelName);
-				else
-					m_Request = Application.LoadLevelAsync (m_LevelName);
-				return false;
-			}
-			else
-				return true;
+            if (bundle != null)
+            {
+                if (m_IsAdditive)
+                {
+                    m_Request = Application.LoadLevelAdditiveAsync(m_LevelName);
+                }
+                else
+                {
+                    m_Request = Application.LoadLevelAsync(m_LevelName);
+                }
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
 		}
 		
 		public override bool IsDone ()
@@ -116,7 +127,7 @@ namespace AssetBundles
 	
 	public class AssetBundleLoadAssetOperationSimulation : AssetBundleLoadAssetOperation
 	{
-		Object							m_SimulatedObject;
+		Object m_SimulatedObject;
 		
 		public AssetBundleLoadAssetOperationSimulation (Object simulatedObject)
 		{

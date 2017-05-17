@@ -12,13 +12,15 @@ namespace LoginNamespace
 {
     public class Login_LoginInitCommnad : SimpleCommand, ICommand
     {
-        private Init_SettingDataProxy mSettingDataProxy;
+        private Init_PlayerPrefsProxy mSettingDataProxy;
 
         public override void Execute(INotification notification)
         {
-            mSettingDataProxy = (Init_SettingDataProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_SettingDataProxy);
+            mSettingDataProxy = (Init_PlayerPrefsProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_PlayerPrefsProxy);
 
-            if(mSettingDataProxy.GetIsFileExist())
+            Debug.Log("mSettingDataProxy.Get_TokenFromServer: " + mSettingDataProxy.Get_TokenFromServer());
+
+            if (mSettingDataProxy.Get_TokenFromServer() != string.Empty)
             {
                 //Not First Login
                 //No need display Buttons, start do init connect to server process!!

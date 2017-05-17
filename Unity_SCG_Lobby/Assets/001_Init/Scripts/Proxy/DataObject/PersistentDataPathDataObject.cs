@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-using PureMVC.Interfaces;
-using PureMVC.Patterns;
-using System.Text;
 using System.IO;
+using System.Text;
+using UnityEngine;
 
 namespace InitNamespace
 {
-    public class SettingDataDataObject
+    public class PersistentDataPathDataObject
     {
+        //Old use specific path and file to save data;
+        //Start
+
         public class InitSettingData
         {
             public string token;
@@ -60,5 +60,6 @@ namespace InitNamespace
 
             return mInitSettingData;
         }
+        //End
     }
 }

@@ -29,7 +29,7 @@ namespace LoginNamespace
             mLoginView.SetQuickLoginButtonActice(false);
             mLoginView.SetFBLoginButtonActive(false);
             mLoginView.SetLoginingTextActive(true);    
-            SendNotification(Define.Command.Login_QuickLoginCommnad);
+            SendNotification(Define.Command.Login_REQ_QuickLoginCommnad);
         }
 
         public void OnFBLoginClick()
@@ -38,7 +38,7 @@ namespace LoginNamespace
             mLoginView.SetQuickLoginButtonActice(false);
             mLoginView.SetFBLoginButtonActive(false);
             mLoginView.SetLoginingTextActive(true);
-            SendNotification(Define.Command.Login_FBLoginCommnad);
+            SendNotification(Define.Command.Login_REQ_FBLoginCommnad);
         }
 
         public void OnFBLogoutClick()

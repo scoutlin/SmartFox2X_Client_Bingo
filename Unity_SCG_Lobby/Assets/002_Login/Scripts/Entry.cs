@@ -26,9 +26,19 @@ namespace LoginNamespace
 
             //RegistCommand
             //mFacade.RegisterCommand(Define.Command.InitMacroCommand, typeof(MacroCommand));
-            mFacade.RegisterCommand(Define.Command.Login_FBLoginCommnad, typeof(Login_FBLoginCommnad));
-            mFacade.RegisterCommand(Define.Command.Login_FBLogoutCommnad, typeof(Login_FBLogoutCommnad));
             mFacade.RegisterCommand(Define.Command.Login_InitCommnad, typeof(Login_LoginInitCommnad));
+
+            mFacade.RegisterCommand(Define.Command.Login_REQ_QuickLoginCommnad, typeof(Login_REQ_QuickLoginCommnad));
+            mFacade.RegisterCommand(Define.Command.Login_RESP_QuickLoginCommnad, typeof(Login_RESP_QuickLoginCommnad));
+
+            mFacade.RegisterCommand(Define.Command.Login_REQ_FBLoginCommnad, typeof(Login_REQ_FBLoginCommnad));
+            mFacade.RegisterCommand(Define.Command.Login_RESP_FBLoginCommnad, typeof(Login_RESP_FBLoginCommnad));
+
+            mFacade.RegisterCommand(Define.Command.Login_REQ_TokenLoginCommand, typeof(Login_REQ_TokenLoginCommnad));
+            mFacade.RegisterCommand(Define.Command.Login_RESP_TokenLoginCommand, typeof(Login_RESP_TokenLoginCommand));
+
+            mFacade.RegisterCommand(Define.Command.Login_FBLogoutCommnad, typeof(Login_FBLogoutCommnad));
+            
         }
 
         // Use this for initialization

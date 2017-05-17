@@ -9,7 +9,7 @@ using Facebook.Unity;
 using LoginNamespace;
 using DefineNamespace;
 
-public class Login_FBLoginCommnad : SimpleCommand, ICommand
+public class Login_REQ_FBLoginCommnad : SimpleCommand, ICommand
 {
     public override void Execute(INotification notification)
     {

@@ -36,6 +36,7 @@ public class LoadScenes : MonoBehaviour
         // Or customize the URL based on your deployment or configuration
         //Test OK. The Website should build on AssetBundle Folder
 		//AssetBundleManager.SetSourceAssetBundleURL("http://localhost:7888/AssetBundles/");
+        //Home WiFi
         AssetBundleManager.SetSourceAssetBundleURL("http://192.168.0.102:7888/AssetBundles/");
 #endif
 
@@ -55,8 +56,11 @@ public class LoadScenes : MonoBehaviour
 
 		// Load level from assetBundle.
 		AssetBundleLoadOperation request = AssetBundleManager.LoadLevelAsync(sceneAssetBundle, levelName, isAdditive);
-		if (request == null)
-			yield break;
+        if (request == null)
+        {
+            yield break;
+        }
+
 		yield return StartCoroutine(request);
 
 		// Calculate and display the elapsed time.

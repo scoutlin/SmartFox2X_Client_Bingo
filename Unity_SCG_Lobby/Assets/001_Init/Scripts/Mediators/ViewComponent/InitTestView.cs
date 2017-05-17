@@ -58,10 +58,16 @@ namespace InitNamespace
             Debug.Log("OnRESTFulFuckWebsiteClick");
         }
 
-        public void OnReadSettingFileClick()
+        public void OnTestWriteReadFileClick()
         {
-            Debug.Log("OnReadSettingFileClick");
-            mInitTestMediator.OnReadSettingFileClick();
+            Debug.Log("OnTestPlayerPrefsClick");
+            mInitTestMediator.OnTestWriteReadFileClick();
+        }
+
+        public void OnTestPlayerPrefsClick()
+        {
+            Debug.Log("OnTestPlayerPrefsClick");
+            mInitTestMediator.OnTestPlayerPrefsClick();
         }
         #endregion
 

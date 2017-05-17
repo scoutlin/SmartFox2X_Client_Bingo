@@ -38,9 +38,10 @@
         public class Proxy
         {
             //Init
-            public const string Init_SettingDataProxy = "Init_SettingDataProxy";
+            public const string Init_PlayerPrefsProxy = "Init_PlayerPrefsProxy";
             public const string Init_RESTFulTestProxy = "Init_RESTFulTestProxy";
             public const string Init_SmartFox2XClientProxy = "Init_SmartFox2XClientProxy";
+            public const string Init_PersistentDataPathProxy = "Init_PersistentDataPathProxy";
 
             //Login
             //public const string Init_InitProxy = "Init_InitProxy";
@@ -67,14 +68,25 @@
             public const string Init_SimpleCommnad = "Init_SimpleCommnad";
             public const string Init_MacroCommand = "Init_MacroCommand";
             public const string Init_TestRESTFulCommand = "Init_TestRESTFulCommand";
-            public const string Init_TestReadSettingFileCommnad = "Init_TestReadSettingFileCommnad";
+            public const string Init_TestPlayerPrefsCommnad = "Init_TestPlayerPrefsCommnad";
+            public const string Init_TestPersistentDataPathCommand = "Init_TestPersistentDataPathCommand";
             public const string Init_CheckSettingDataCommand = "Init_CheckSettingDataCommand";
 
             //Login
-            public const string Login_FBLoginCommnad = "Login_FBLoginCommnad";
-            public const string Login_FBLogoutCommnad = "Login_FBLogoutCommnad";
+            
+            
             public const string Login_InitCommnad = "Login_InitCommnad";
-            public const string Login_QuickLoginCommnad = "Login_QuickLoginCommnad";
+
+            public const string Login_REQ_QuickLoginCommnad = "Login_REQ_QuickLoginCommnad";
+            public const string Login_RESP_QuickLoginCommnad = "Login_RESP_QuickLoginCommnad";
+
+            public const string Login_REQ_FBLoginCommnad = "Login_REQ_FBLoginCommnad";
+            public const string Login_RESP_FBLoginCommnad = "Login_RESP_FBLoginCommnad";
+
+            public const string Login_REQ_TokenLoginCommand = "Login_REQ_TokenLoginCommand";
+            public const string Login_RESP_TokenLoginCommand = "Login_RESP_TokenLoginCommand";
+
+            public const string Login_FBLogoutCommnad = "Login_FBLogoutCommnad";
             //Lobby
         }
     }

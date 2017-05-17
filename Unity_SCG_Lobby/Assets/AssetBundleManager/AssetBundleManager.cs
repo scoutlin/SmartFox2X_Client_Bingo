@@ -150,21 +150,24 @@ namespace AssetBundles
 	
 		public static void SetDevelopmentAssetBundleServer()
 		{
-			#if UNITY_EDITOR
-			// If we're in Editor simulation mode, we don't have to setup a download URL
-			if (SimulateAssetBundleInEditor)
-				return;
+#if UNITY_EDITOR
+            // If we're in Editor simulation mode, we don't have to setup a download URL
+            if (SimulateAssetBundleInEditor)
+            {
+                return;
+            }
 #endif
 
             //Scott
-            Debug.Log("Fuck");
+            Debug.Log("SetDevelopmentAssetBundleServer");
 
 
 			TextAsset urlFile = Resources.Load("AssetBundleServerURL") as TextAsset;
 			string url = (urlFile != null) ? urlFile.text.Trim() : null;
 
-            
 
+            //Scott
+            Debug.Log("AssetBundleServerURL: " + url);
 
             if (url == null || url.Length == 0)
 			{
@@ -183,30 +186,41 @@ namespace AssetBundles
 		// Get loaded AssetBundle, only return vaild object when all the dependencies are downloaded successfully.
 		static public LoadedAssetBundle GetLoadedAssetBundle (string assetBundleName, out string error)
 		{
-			if (m_DownloadingErrors.TryGetValue(assetBundleName, out error) )
-				return null;
-		
+            if (m_DownloadingErrors.TryGetValue(assetBundleName, out error))
+            {
+                return null;
+            }
+
 			LoadedAssetBundle bundle = null;
 			m_LoadedAssetBundles.TryGetValue(assetBundleName, out bundle);
-			if (bundle == null)
-				return null;
-			
+
+            if (bundle == null)
+            {
+                return null;
+            }
+
 			// No dependencies are recorded, only the bundle itself is required.
 			string[] dependencies = null;
-			if (!m_Dependencies.TryGetValue(assetBundleName, out dependencies) )
-				return bundle;
-			
+            if (!m_Dependencies.TryGetValue(assetBundleName, out dependencies))
+            {
+                return bundle;
+            }
+
 			// Make sure all dependencies are loaded
 			foreach(var dependency in dependencies)
 			{
-				if (m_DownloadingErrors.TryGetValue(assetBundleName, out error) )
-					return bundle;
-	
+                if (m_DownloadingErrors.TryGetValue(assetBundleName, out error))
+                {
+                    return bundle;
+                }
+
 				// Wait all the dependent assetBundles being loaded.
 				LoadedAssetBundle dependentBundle;
 				m_LoadedAssetBundles.TryGetValue(dependency, out dependentBundle);
-				if (dependentBundle == null)
-					return null;
+                if (dependentBundle == null)
+                {
+                    return null;
+                }
 			}
 	
 			return bundle;
@@ -227,11 +241,13 @@ namespace AssetBundles
 	
 			var go = new GameObject("AssetBundleManager", typeof(AssetBundleManager));
 			DontDestroyOnLoad(go);
-		
-	#if UNITY_EDITOR	
-			// If we're in Editor simulation mode, we don't need the manifest assetBundle.
-			if (SimulateAssetBundleInEditor)
-				return null;
+
+#if UNITY_EDITOR
+            // If we're in Editor simulation mode, we don't need the manifest assetBundle.
+            if (SimulateAssetBundleInEditor)
+            {
+                return null;
+            }
 	#endif
 	
 			LoadAssetBundle(manifestAssetBundleName, true);
@@ -247,13 +263,18 @@ namespace AssetBundles
 			Log(LogType.Info, "Loading Asset Bundle " + (isLoadingAssetBundleManifest ? "Manifest: " : ": ") + assetBundleName);
 
 
-	#if UNITY_EDITOR
-			// If we're in Editor simulation mode, we don't have to really load the assetBundle and its dependencies.
-			if (SimulateAssetBundleInEditor)
-				return;
-	#endif
-	
-			if (!isLoadingAssetBundleManifest)
+#if UNITY_EDITOR
+            // If we're in Editor simulation mode, we don't have to really load the assetBundle and its dependencies.
+            if (SimulateAssetBundleInEditor)
+            {
+                return;
+            }
+#endif
+
+            Debug.Log("LoadAssetBundle - No Simulate");
+
+
+            if (!isLoadingAssetBundleManifest)
 			{
 				if (m_AssetBundleManifest == null)
 				{
@@ -285,15 +306,19 @@ namespace AssetBundles
 			for (int i = 0; i < bundlesWithVariant.Length; i++)
 			{
 				string[] curSplit = bundlesWithVariant[i].Split('.');
-				if (curSplit[0] != split[0])
-					continue;
-				
+                if (curSplit[0] != split[0])
+                {
+                    continue;
+                }
+
 				int found = System.Array.IndexOf(m_ActiveVariants, curSplit[1]);
-				
-				// If there is no active variant found. We still want to use the first 
-				if (found == -1)
-					found = int.MaxValue-1;
-						
+
+                // If there is no active variant found. We still want to use the first 
+                if (found == -1)
+                {
+                    found = int.MaxValue - 1;
+                }
+                	
 				if (found < bestFit)
 				{
 					bestFit = found;
@@ -334,22 +359,38 @@ namespace AssetBundles
 				bundle.m_ReferencedCount++;
 				return true;
 			}
-	
-			// @TODO: Do we need to consider the referenced count of WWWs?
-			// In the demo, we never have duplicate WWWs as we wait LoadAssetAsync()/LoadLevelAsync() to be finished before calling another LoadAssetAsync()/LoadLevelAsync().
-			// But in the real case, users can call LoadAssetAsync()/LoadLevelAsync() several times then wait them to be finished which might have duplicate WWWs.
-			if (m_DownloadingWWWs.ContainsKey(assetBundleName) )
-				return true;
-	
+
+            // @TODO: Do we need to consider the referenced count of WWWs?
+            // In the demo, we never have duplicate WWWs as we wait LoadAssetAsync()/LoadLevelAsync() to be finished before calling another LoadAssetAsync()/LoadLevelAsync().
+            // But in the real case, users can call LoadAssetAsync()/LoadLevelAsync() several times then wait them to be finished which might have duplicate WWWs.
+            if (m_DownloadingWWWs.ContainsKey(assetBundleName))
+            {
+                return true;
+            }
+
 			WWW download = null;
 			string url = m_BaseDownloadingURL + assetBundleName;
 
             // For manifest assetbundle, always download it as we don't have hash for it.
             if (isLoadingAssetBundleManifest)
-				download = new WWW(url);
-			else
-				download = WWW.LoadFromCacheOrDownload(url, m_AssetBundleManifest.GetAssetBundleHash(assetBundleName), 0); 
-	
+            {
+                Debug.Log("!!!!!!!!!!!!!!!!!!!!!!! Damn Fuck !!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Debug.Log("!!!!!!!!!!!!!!!!!!!!!!! Manual Change url !!!!!!!!!!!!!!!!!!");
+                //Original
+                Debug.Log("WWW(url)" + url); 
+                download = new WWW(url);
+
+                //Fix   
+                url = "http://10.10.10.4:7888/Android/Android";
+                Debug.Log("WWW(url)" + url);
+                download = new WWW(url);
+            }
+            else
+            {
+                Debug.Log("WWW.LoadFromCacheOrDownload" + url);
+                download = WWW.LoadFromCacheOrDownload(url, m_AssetBundleManifest.GetAssetBundleHash(assetBundleName), 0);
+            }
+
 			m_DownloadingWWWs.Add(assetBundleName, download);
 	
 			return false;
@@ -366,25 +407,33 @@ namespace AssetBundles
 	
 			// Get dependecies from the AssetBundleManifest object..
 			string[] dependencies = m_AssetBundleManifest.GetAllDependencies(assetBundleName);
-			if (dependencies.Length == 0)
-				return;
-				
-			for (int i=0;i<dependencies.Length;i++)
-				dependencies[i] = RemapVariantName (dependencies[i]);
-				
+            if (dependencies.Length == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < dependencies.Length; i++)
+            {
+                dependencies[i] = RemapVariantName(dependencies[i]);
+            }
+
 			// Record and load all dependencies.
 			m_Dependencies.Add(assetBundleName, dependencies);
-			for (int i=0;i<dependencies.Length;i++)
-				LoadAssetBundleInternal(dependencies[i], false);
+            for (int i = 0; i < dependencies.Length; i++)
+            {
+                LoadAssetBundleInternal(dependencies[i], false);
+            }
 		}
 	
 		// Unload assetbundle and its dependencies.
 		static public void UnloadAssetBundle(string assetBundleName)
 		{
-	#if UNITY_EDITOR
-			// If we're in Editor simulation mode, we don't have to load the manifest assetBundle.
-			if (SimulateAssetBundleInEditor)
-				return;
+#if UNITY_EDITOR
+            // If we're in Editor simulation mode, we don't have to load the manifest assetBundle.
+            if (SimulateAssetBundleInEditor)
+            {
+                return;
+            }
 	#endif
 	
 			//Debug.Log(m_LoadedAssetBundles.Count + " assetbundle(s) in memory before unloading " + assetBundleName);
@@ -398,9 +447,12 @@ namespace AssetBundles
 		static protected void UnloadDependencies(string assetBundleName)
 		{
 			string[] dependencies = null;
-			if (!m_Dependencies.TryGetValue(assetBundleName, out dependencies) )
-				return;
-	
+
+            if (!m_Dependencies.TryGetValue(assetBundleName, out dependencies))
+            {
+                return;
+            }
+
 			// Loop dependencies.
 			foreach(var dependency in dependencies)
 			{
@@ -414,9 +466,11 @@ namespace AssetBundles
 		{
 			string error;
 			LoadedAssetBundle bundle = GetLoadedAssetBundle(assetBundleName, out error);
-			if (bundle == null)
-				return;
-	
+            if (bundle == null)
+            {
+                return;
+            }
+
 			if (--bundle.m_ReferencedCount == 0)
 			{
 				bundle.m_AssetBundle.Unload(false);
@@ -470,12 +524,14 @@ namespace AssetBundles
 			// Update all in progress operations
 			for (int i=0;i<m_InProgressOperations.Count;)
 			{
-				if (!m_InProgressOperations[i].Update())
-				{
-					m_InProgressOperations.RemoveAt(i);
-				}
-				else
-					i++;
+                if (!m_InProgressOperations[i].Update())
+                {
+                    m_InProgressOperations.RemoveAt(i);
+                }
+                else
+                {
+                    i++;
+                }
 			}
 		}
 	
