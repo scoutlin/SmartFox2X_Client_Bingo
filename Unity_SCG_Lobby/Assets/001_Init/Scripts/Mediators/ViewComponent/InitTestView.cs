@@ -1,7 +1,7 @@
 ﻿using DefineNamespace;
 using UnityEngine;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class InitTestView : MonoBehaviour
     {

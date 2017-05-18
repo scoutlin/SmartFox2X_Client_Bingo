@@ -37,11 +37,14 @@
 
         public class Proxy
         {
+            //Common
+            public const string PlayerPrefsProxy = "PlayerPrefsProxy";
+            public const string RESTFulProxy = "RESTFulProxy";
+            public const string SmartFox2XClientProxy = "SmartFox2XClientProxy";
+            public const string PersistentDataPathProxy = "PersistentDataPathProxy";
+
             //Init
-            public const string Init_PlayerPrefsProxy = "Init_PlayerPrefsProxy";
-            public const string Init_RESTFulTestProxy = "Init_RESTFulTestProxy";
-            public const string Init_SmartFox2XClientProxy = "Init_SmartFox2XClientProxy";
-            public const string Init_PersistentDataPathProxy = "Init_PersistentDataPathProxy";
+
 
             //Login
             //public const string Init_InitProxy = "Init_InitProxy";
@@ -71,11 +74,14 @@
             public const string Init_TestPlayerPrefsCommnad = "Init_TestPlayerPrefsCommnad";
             public const string Init_TestPersistentDataPathCommand = "Init_TestPersistentDataPathCommand";
             public const string Init_CheckSettingDataCommand = "Init_CheckSettingDataCommand";
+            
 
             //Login
             
             
             public const string Login_InitCommnad = "Login_InitCommnad";
+
+            public const string Login_InitialSmartFox2XClientCommnad = "Login_InitialSmartFox2XClientCommnad";
 
             public const string Login_REQ_QuickLoginCommnad = "Login_REQ_QuickLoginCommnad";
             public const string Login_RESP_QuickLoginCommnad = "Login_RESP_QuickLoginCommnad";

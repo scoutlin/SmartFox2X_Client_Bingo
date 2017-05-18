@@ -7,8 +7,11 @@ using PureMVC.Interfaces;
 
 using DefineNamespace;
 using BingoFacadeNamespace;
+using PlayerPrefsNamespace;
+using RESTFulNamespace;
+using SmartFox2XClientNamespace;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class Entry : MonoBehaviour
     {
@@ -20,10 +23,10 @@ namespace InitNamespace
             IFacade mFacade = BingoFacade.Instance;
             
             //RegistProxy
-            mFacade.RegisterProxy(new Init_PlayerPrefsProxy(Define.Proxy.Init_PlayerPrefsProxy));
-            mFacade.RegisterProxy(new Init_TestRESTFulProxy(Define.Proxy.Init_RESTFulTestProxy));
-            mFacade.RegisterProxy(new Init_SmartFox2XClientProxy(Define.Proxy.Init_SmartFox2XClientProxy));
-            mFacade.RegisterProxy(new Init_PersistentDataPathProxy(Define.Proxy.Init_PersistentDataPathProxy));
+            mFacade.RegisterProxy(new PlayerPrefsProxy(Define.Proxy.PlayerPrefsProxy));
+            mFacade.RegisterProxy(new RESTFulProxy(Define.Proxy.RESTFulProxy));
+            mFacade.RegisterProxy(new SmartFox2XClientProxy(Define.Proxy.SmartFox2XClientProxy));
+            mFacade.RegisterProxy(new PersistentDataPathProxy(Define.Proxy.PersistentDataPathProxy));
 
             //RegistMediator
             mFacade.RegisterMediator(new Init_InitMediator(mInitView, Define.Mediator.Init_InitMediator));

@@ -4,19 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using InitNamespace;
+using PersistentDataPathNamespace;
 using BingoFacadeNamespace;
 using DefineNamespace;
+using PlayerPrefsNamespace;
 
 namespace LoginNamespace
 {
     public class Login_LoginInitCommnad : SimpleCommand, ICommand
     {
-        private Init_PlayerPrefsProxy mSettingDataProxy;
+        private PlayerPrefsProxy mSettingDataProxy;
 
         public override void Execute(INotification notification)
         {
-            mSettingDataProxy = (Init_PlayerPrefsProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_PlayerPrefsProxy);
+            mSettingDataProxy = (PlayerPrefsProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.PlayerPrefsProxy);
 
             Debug.Log("mSettingDataProxy.Get_TokenFromServer: " + mSettingDataProxy.Get_TokenFromServer());
 

@@ -376,12 +376,12 @@ namespace AssetBundles
             {
                 Debug.Log("!!!!!!!!!!!!!!!!!!!!!!! Damn Fuck !!!!!!!!!!!!!!!!!!!!!!!!!!");
                 Debug.Log("!!!!!!!!!!!!!!!!!!!!!!! Manual Change url !!!!!!!!!!!!!!!!!!");
-                //Original
-                Debug.Log("WWW(url)" + url); 
-                download = new WWW(url);
+                ////Original
+                //Debug.Log("WWW(url)" + url); 
+                //download = new WWW(url);
 
                 //Fix   
-                url = "http://10.10.10.4:7888/Android/Android";
+                url = "http://10.10.10.87:7888/Android/Android";
                 Debug.Log("WWW(url)" + url);
                 download = new WWW(url);
             }

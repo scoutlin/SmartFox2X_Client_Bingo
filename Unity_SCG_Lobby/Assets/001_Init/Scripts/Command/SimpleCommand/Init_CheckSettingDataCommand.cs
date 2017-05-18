@@ -7,12 +7,13 @@ using PureMVC.Patterns;
 using System.IO;
 
 using DefineNamespace;
+using PlayerPrefsNamespace;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class Init_CheckSettingDataCommand : SimpleCommand, ICommand
     {
-        public Init_PlayerPrefsProxy mSettingDataProxy;
+        public PlayerPrefsProxy mSettingDataProxy;
 
         private string tokenFromServer = string.Empty;
 

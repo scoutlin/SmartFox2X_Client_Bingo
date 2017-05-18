@@ -32,13 +32,13 @@ namespace LoginNamespace
         // Use this for initialization
         void Start()
         {
-
+            mLoginMediator.OnInitialSmartFox2XClient();
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            
         }
 
         public void SetMediatorRef(Login_LoginMediator mLoginMediator)
@@ -49,7 +49,7 @@ namespace LoginNamespace
         #region UserInput
         public void OnQuickLoginClick()
         {
-            mLoginMediator.OnLoginClick();
+            mLoginMediator.OnQuickLoginClick();
             Debug.Log("OnLoginClick");
         }
 

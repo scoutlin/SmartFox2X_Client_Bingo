@@ -1,15 +1,16 @@
 ﻿using DefineNamespace;
+using PlayerPrefsNamespace;
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class Init_TestPlayerPrefsCommnad : SimpleCommand, ICommand
     {
-        private Init_PlayerPrefsProxy mInitSettingDataProxy;
+        private PlayerPrefsProxy mInitSettingDataProxy;
 
         public override void Execute(INotification notification)
         {
@@ -17,7 +18,7 @@ namespace InitNamespace
 
             Debug.Log("TestReadSettingFileCommnad - Execute()");
 
-            mInitSettingDataProxy = (Init_PlayerPrefsProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_PlayerPrefsProxy);
+            mInitSettingDataProxy = (PlayerPrefsProxy)BingoFacadeNamespace.BingoFacade.Instance.RetrieveProxy(Define.Proxy.PlayerPrefsProxy);
 
             tokenFromServer = "!!!!!!!!!!!!!  PlayerPrefs  !!!!!!!!!!!!!";
 

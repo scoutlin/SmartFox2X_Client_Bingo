@@ -10,13 +10,33 @@ using Sfs2X.Logging;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities;
 
-namespace InitNamespace
+namespace SmartFox2XClientNamespace
 {
     public class SmartFox2XClientDataObject
     {
+        private SmartFox2XClientProxy mSmartFox2XClientProxy;
+
+        public class SendExtensionPacketStruct
+        {
+            public string cmd;
+            public ISFSObject mSFSObject;
+        }
+
+        public class ReceiveExtensionPacketStruct
+        {
+            public string cmd;
+            public string json;
+        }
+
+
         public SmartFox2XClientDataObject()
         {
 
+        }
+
+        public void SetReference(SmartFox2XClientProxy mSmartFox2XClientProxy)
+        {
+            this.mSmartFox2XClientProxy = mSmartFox2XClientProxy;
         }
 
         private SmartFox smartFox;
@@ -43,7 +63,7 @@ namespace InitNamespace
 
 
         #region SCG
-        private string SCG_Host = "192.168.122.97";       // Default host
+        private string SCG_Host = "localhost";       // Default host
         private string SCG_Zone = "brbingo";   // Default zone
         private string SCG_Room = "The Lobby";
         private int SCG_TcpPort = 9933;              // Default TCP port
@@ -54,10 +74,12 @@ namespace InitNamespace
 
         #region Queue
         private object lockOfReceiveExtensionQueue = new object();
-        private Queue<string> receiveExtensionQueue = new Queue<string>();
+        private Queue<ReceiveExtensionPacketStruct> receiveExtensionQueue = new Queue<ReceiveExtensionPacketStruct>();
 
         private object lockOfSendExtensionQueue = new object();
-        private Queue<string> sendExtensionQueue = new Queue<string>();
+        private Queue<SendExtensionPacketStruct> sendExtensionQueue = new Queue<SendExtensionPacketStruct>();
+
+        
         #endregion
 
 
@@ -66,6 +88,10 @@ namespace InitNamespace
             return smartFox;
         }
 
+        public void ProcessEvents()
+        {
+            smartFox.ProcessEvents();
+        }
 
         //Functions
         public void InitSmartFox()
@@ -113,8 +139,9 @@ namespace InitNamespace
             smartFox.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
         }
 
-        public void Connect()
+        public bool Connect()
         {
+            bool rt = false;
             Debug.Log("Connect");
 
             if (smartFox == null || !smartFox.IsConnected)
@@ -136,6 +163,8 @@ namespace InitNamespace
 
                 // Connect to SFS2X
                 smartFox.Connect(cfg);
+
+                rt = true;
             }
             else
             {
@@ -143,7 +172,11 @@ namespace InitNamespace
 
                 // Disconnect from SFS2X
                 smartFox.Disconnect();
+
+                rt = false;
             }
+
+            return rt;
         }
 
 
@@ -179,6 +212,7 @@ namespace InitNamespace
         private void OnConnection(BaseEvent evt)
         {
             Debug.Log("OnConnect");
+            bool isConnect = false;
 
             if ((bool)evt.Params["success"])
             {
@@ -186,21 +220,27 @@ namespace InitNamespace
                 Debug.Log("SFS2X API version: " + smartFox.Version);
                 Debug.Log("Connection mode is: " + smartFox.ConnectionMode);
 
-
-                Login();
+                isConnect = true;
             }
             else
             {
                 Debug.Log("Connection failed; is the server running at all?");
+
+                isConnect = false;
             }
+
+            mSmartFox2XClientProxy.OnConnection(isConnect);
         }
 
         private void OnConnectionLost(BaseEvent evt)
         {
-            Debug.Log("Connection was lost; reason is: " + (string)evt.Params["reason"]);
-
-            // Remove SFS2X listeners and re-enable interface
+            string reason = (string)evt.Params["reason"];
             Disconnect();
+            Debug.Log("Connection was lost; reason is: " + reason);
+
+            mSmartFox2XClientProxy.OnConnectionLost(reason);
+            // Remove SFS2X listeners and re-enable interface
+
         }
 
         //----------------------------------------------------------
@@ -213,6 +253,8 @@ namespace InitNamespace
 
             string message = (string)evt.Params["message"];
             ShowLogMessage("INFO", message);
+
+            mSmartFox2XClientProxy.OnInfoMessage(message);
         }
 
         public void OnWarnMessage(BaseEvent evt)
@@ -221,6 +263,8 @@ namespace InitNamespace
 
             string message = (string)evt.Params["message"];
             ShowLogMessage("WARN", message);
+
+            mSmartFox2XClientProxy.OnWarnMessage(message);
         }
 
         public void OnErrorMessage(BaseEvent evt)
@@ -229,6 +273,8 @@ namespace InitNamespace
 
             string message = (string)evt.Params["message"];
             ShowLogMessage("ERROR", message);
+
+            mSmartFox2XClientProxy.OnErrorMessage(message);
         }
 
         private void ShowLogMessage(string level, string message)
@@ -236,7 +282,6 @@ namespace InitNamespace
             Debug.Log("ShowLogMessage");
 
             message = "[SFS > " + level + "] " + message;
-            Debug.Log(message);
             Debug.Log(message);
         }
 
@@ -276,19 +321,14 @@ namespace InitNamespace
 
             Debug.Log("roomList: " + roomListString);
 
-
-            // Join first Room in Zone
-            if (smartFox.RoomList.Count > 0)
-            {
-                //smartFox.Send(new Sfs2X.Requests.JoinRoomRequest(smartFox.RoomList[0].Name));
-                smartFox.Send(new Sfs2X.Requests.JoinRoomRequest(SCG_Room));
-            }
+            mSmartFox2XClientProxy.OnLogin(msg);
         }
+
 
         private void OnLoginError(BaseEvent evt)
         {
             Debug.Log("OnLoginError");
-
+            string errorMessage;
             // Disconnect
             smartFox.Disconnect();
 
@@ -296,21 +336,33 @@ namespace InitNamespace
             Disconnect();
 
             // Show error message
-            Debug.Log("Login failed: " + (string)evt.Params["errorMessage"]);
+            errorMessage = (string)evt.Params["errorMessage"];
+            Debug.Log("Login failed: " + errorMessage);
+
+            mSmartFox2XClientProxy.OnLoginError(errorMessage);
+        }
+
+        public void JoinRoom()
+        {
+            smartFox.Send(new Sfs2X.Requests.JoinRoomRequest(SCG_Room));
         }
 
         private void OnRoomAdd(BaseEvent evt)
         {
             Debug.Log("OnRoomAdd");
+            mSmartFox2XClientProxy.OnRoomAdd();
         }
 
         private void OnRoomJoin(BaseEvent evt)
         {
             Debug.Log("OnRoomJoin");
 
+            string msg;
+
             Room room = (Room)evt.Params["room"];
 
             // Show system message
+            msg = "\nYou joined room '" + room.Name + "'\n";
             Debug.Log("\nYou joined room '" + room.Name + "'\n");
 
             // Populate users list
@@ -330,51 +382,55 @@ namespace InitNamespace
                 }
             }
 
-            //Move to CandylandExtraBetController
-            //Start
-            //Debug.Log("User Name List: " + userNameListString);
-
-            //SFSObject mSFSObject = SFSObject.NewInstance();
-
-            //string data = string.Format("{\"type\":\"REQ_CA\",\"timestamp\":%d,\"status\":\"NONE\",\"typePL\":\"REQ_INIT\",\"payload\":\"%s\",\"isCompressed\":\"false\"}", DateTime.Now.Ticks, "{\\\"type\\\":\\\"REQ_INIT\\\",\\\"gameName\\\":\\\"candyland\\\"}");
-
-            //mSFSObject.PutText("data", data);
-
-            //smartFox.Send(new Sfs2X.Requests.ExtensionRequest("cmd.game", mSFSObject));
-            //End
+            mSmartFox2XClientProxy.OnRoomJoin(msg);
         }
 
         private void OnRoomJoinError(BaseEvent evt)
         {
             Debug.Log("OnRoomJoinError");
 
+            string errorMsg;
+
             // Show error message
-            Debug.Log("Room join failed: " + (string)evt.Params["errorMessage"]);
+            errorMsg = (string)evt.Params["errorMessage"];
+            Debug.Log("Room join failed: " + errorMsg);
+
+            mSmartFox2XClientProxy.OnRoomJoinError(errorMsg);
         }
 
         private void OnRoomVariablesUpate(BaseEvent evt)
         {
             Debug.Log("OnRoomVariablesUpate");
+            mSmartFox2XClientProxy.OnRoomVariablesUpate();
         }
 
         private void OnPublicMessage(BaseEvent evt)
         {
             Debug.Log("OnPublicMessage");
 
+            string msg;
+
             User sender = (User)evt.Params["sender"];
             string message = (string)evt.Params["message"];
 
+            msg = sender + (string)evt.Params["message"];
+
             Debug.Log("PublicMessage: " + sender + ", " + message);
+
+            mSmartFox2XClientProxy.OnPublicMessage(msg);
         }
 
         private void OnUserEnterRoom(BaseEvent evt)
         {
             Debug.Log("OnUserEnterRoom");
 
+            string msg;
+
             User user = (User)evt.Params["user"];
             Room room = (Room)evt.Params["room"];
 
             // Show system message
+            msg = "User " + user.Name + " entered the room";
             Debug.Log("User " + user.Name + " entered the room");
 
             // Populate users list
@@ -385,20 +441,28 @@ namespace InitNamespace
                 roomListString += room2.Id.ToString() + ", ";
             }
 
+            msg += "roomList: " + roomListString;
+
             Debug.Log("roomList: " + roomListString);
+
+            mSmartFox2XClientProxy.OnUserEnterRoom(msg);
         }
 
         private void OnUserExitRoom(BaseEvent evt)
         {
             Debug.Log("OnUserExitRoom");
 
+            string msg = string.Empty;
+
             User user = (User)evt.Params["user"];
+
 
             if (user != smartFox.MySelf)
             {
                 Room room = (Room)evt.Params["room"];
 
                 // Show system message
+                msg = "User " + user.Name + " left the room";
                 Debug.Log("User " + user.Name + " left the room");
 
                 // Populate users list
@@ -420,6 +484,8 @@ namespace InitNamespace
 
                 Debug.Log("User Name List: " + userNameListString);
             }
+
+            mSmartFox2XClientProxy.OnUserExitRoom(msg);
         }
 
         private void OnUserCountChange(BaseEvent evt)
@@ -439,41 +505,48 @@ namespace InitNamespace
             {
                 Debug.Log("OnExtensionResponse");
 
+                ReceiveExtensionPacketStruct mExtensionPacketStruct = new ReceiveExtensionPacketStruct();
                 string cmd = (string)evt.Params["cmd"];
-                ISFSObject respParams = (SFSObject)evt.Params["params"];
+                ISFSObject mSFSObject = (SFSObject)evt.Params["params"];
+
+                mExtensionPacketStruct.cmd = cmd;
+                mExtensionPacketStruct.json = mSFSObject.GetText("json");
 
                 Debug.Log("Current cmd:" + cmd);
 
                 if (CMD_GP_GAME.Equals(cmd))
                 {
-                    Debug.Log("RespMsg: " + respParams.GetText("data"));
+                    Debug.Log("RespMsg: " + mSFSObject.GetText("data"));
                 }
                 else if (CMD_GP_OTHER.Equals(cmd))
                 {
                     Debug.Log("RespMsg: other test");
                 }
 
-
-                receiveExtensionQueue.Enqueue(respParams.GetText("data"));
-
-                // ----------------------------------------------------------------------------------------------
-                // 房間變數測試
-                // ----------------------------------------------------------------------------------------------
-                //RoomVariable rv = sfs.getLastJoinedRoom().getVariable("CandylandRoomSubject");
-                //if (rv != null && !rv.isNull())
-                //	logger.info("CandylandRoomSubject: " + rv.getValue().toString());
-                //// ----------------------------------------------------------------------------------------------
-
-                //this.gameDealing();
+                PutReceiveExtensionPacketIntoQueue(mExtensionPacketStruct);
             }
         }
 
-        public long GetExtensionPacketQueueLength()
+
+
+        #region ReceiveQueue related
+        public long GetReceiveExtensionQueueLength()
         {
-            return receiveExtensionQueue.Count;
+            lock (lockOfReceiveExtensionQueue)
+            {
+                return receiveExtensionQueue.Count;
+            }
         }
 
-        public string GetExtensionPacket()
+        public void PutReceiveExtensionPacketIntoQueue(ReceiveExtensionPacketStruct mSendPacketStruct)
+        {
+            lock (lockOfReceiveExtensionQueue)
+            {
+                receiveExtensionQueue.Enqueue(mSendPacketStruct);
+            }
+        }
+
+        public ReceiveExtensionPacketStruct GetRecieveExtentionRequestFromQueue()
         {
             lock (lockOfReceiveExtensionQueue)
             {
@@ -483,25 +556,52 @@ namespace InitNamespace
                 }
                 else
                 {
-                    return string.Empty;
+                    return null;
                 }
             }
         }
+        #endregion
 
-        public void SendExtensionPacket(string cmd, SFSObject mSFSObject)
+        #region SendQueueRelated
+        public long GetSendExtensionQueueQueueLength()
         {
-            //For Test Candyland
-            //SFSObject mSFSObject = SFSObject.NewInstance();
-            ////string data = string.Format("{\"type\":\"REQ_CA\",\"timestamp\":%d,\"status\":\"NONE\",\"typePL\":\"REQ_INIT\",\"payload\":\"%s\",\"isCompressed\":\"false\"}", DateTime.Now.Ticks, "{\\\"type\\\":\\\"REQ_INIT\\\",\\\"gameName\\\":\\\"candyland\\\"}");
-            //mSFSObject.PutText("data", jsonString);   
-            //smartFox.Send(new Sfs2X.Requests.ExtensionRequest("cmd.game", mSFSObject));
+            lock (lockOfReceiveExtensionQueue)
+            {
+                return sendExtensionQueue.Count;
+            }
+        }
+
+        public void PutSendExenteionRequestIntoQueue(string cmd, string json)
+        {
             lock (lockOfSendExtensionQueue)
             {
-                smartFox.Send(new Sfs2X.Requests.ExtensionRequest(cmd, mSFSObject));
+                ISFSObject mSFSObject = new SFSObject();
+                mSFSObject.PutText("data", json);
+
+                SendExtensionPacketStruct mSendPacketStruct = new SendExtensionPacketStruct();
+                mSendPacketStruct.cmd = cmd;
+                mSendPacketStruct.mSFSObject = mSFSObject;
+
+                sendExtensionQueue.Enqueue(mSendPacketStruct);
+            }
+        }
+
+        public void SendExtensionRequest()
+        {
+            lock (lockOfSendExtensionQueue)
+            {
+                SendExtensionPacketStruct mSendPacketStruct = new SendExtensionPacketStruct();
+
+                if (sendExtensionQueue.Count > 0)
+                {
+                    mSendPacketStruct = sendExtensionQueue.Dequeue();
+
+                    smartFox.Send(new Sfs2X.Requests.ExtensionRequest(mSendPacketStruct.cmd,
+                                                                      mSendPacketStruct.mSFSObject));
+                }
             }
         }
         #endregion
-    
+        #endregion
     }
 }
-

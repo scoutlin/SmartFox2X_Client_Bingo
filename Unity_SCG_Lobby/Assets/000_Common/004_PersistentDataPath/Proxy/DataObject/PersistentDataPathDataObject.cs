@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class PersistentDataPathDataObject
     {

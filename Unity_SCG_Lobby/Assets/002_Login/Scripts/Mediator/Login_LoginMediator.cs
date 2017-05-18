@@ -23,7 +23,13 @@ namespace LoginNamespace
         }
 
         #region EventFromView
-        public void OnLoginClick()
+        public void OnInitialSmartFox2XClient()
+        {
+            Debug.Log("LoginMediator - OnInitial");
+            SendNotification(Define.Command.Login_InitialSmartFox2XClientCommnad);
+        }
+
+        public void OnQuickLoginClick()
         {
             Debug.Log("LoginMediator - OnLoginClick");
             mLoginView.SetQuickLoginButtonActice(false);

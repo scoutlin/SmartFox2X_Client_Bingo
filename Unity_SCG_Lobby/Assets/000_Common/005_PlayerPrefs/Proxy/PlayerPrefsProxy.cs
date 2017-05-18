@@ -5,13 +5,13 @@ using UnityEngine;
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 
-namespace InitNamespace
+namespace PlayerPrefsNamespace
 {
-    public class Init_PlayerPrefsProxy : Proxy, IProxy
+    public class PlayerPrefsProxy : Proxy, IProxy
     {
         private PlayerPrefsDataObject mPlayerPrefsDataObject;
 
-        public Init_PlayerPrefsProxy(string name) : base(name, new PlayerPrefsDataObject())
+        public PlayerPrefsProxy(string name) : base(name, new PlayerPrefsDataObject())
         {
             mPlayerPrefsDataObject = (PlayerPrefsDataObject)Data;
             

@@ -8,11 +8,11 @@ using System.IO;
 using System.Text;
 using System.Collections.Specialized;
 
-namespace InitNamespace
+namespace RESTFulNamespace
 {
-    public class RESTFulTestDataObject
+    public class RESTFulDataObject
     {
-        public RESTFulTestDataObject()
+        public RESTFulDataObject()
         {
 
         }

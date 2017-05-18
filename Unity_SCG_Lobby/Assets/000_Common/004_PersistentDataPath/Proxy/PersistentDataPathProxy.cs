@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
-    public class Init_PersistentDataPathProxy : Proxy, IProxy
+    public class PersistentDataPathProxy : Proxy, IProxy
     {
         private PersistentDataPathDataObject mPersistentDataPathDataObject;
 
-        public Init_PersistentDataPathProxy(string name) : base(name, new PersistentDataPathDataObject())
+        public PersistentDataPathProxy(string name) : base(name, new PersistentDataPathDataObject())
         {
             mPersistentDataPathDataObject = (PersistentDataPathDataObject)Data;
 

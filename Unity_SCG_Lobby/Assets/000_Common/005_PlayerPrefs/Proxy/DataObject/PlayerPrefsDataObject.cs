@@ -7,7 +7,7 @@ using PureMVC.Patterns;
 using System.Text;
 using System.IO;
 
-namespace InitNamespace
+namespace PlayerPrefsNamespace
 {
     public class PlayerPrefsDataObject
     {

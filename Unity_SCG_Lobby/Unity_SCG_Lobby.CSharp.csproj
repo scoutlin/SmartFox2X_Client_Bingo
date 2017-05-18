@@ -91,6 +91,18 @@
   <ItemGroup>
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\BingoFacade.cs" />
     <Compile Include="Assets\000_Common\000_pureMVC\Scripts\Define.cs" />
+    <Compile Include="Assets\000_Common\002_SFS2X_Protocol\Bingo\BingoProtocol.cs" />
+    <Compile Include="Assets\000_Common\002_SFS2X_Protocol\Common\CommondProtocol.cs" />
+    <Compile Include="Assets\000_Common\003_SFS2X_DataStruct\Bingo\BingoDataStruct.cs" />
+    <Compile Include="Assets\000_Common\003_SFS2X_DataStruct\Common\CommonDataStruct.cs" />
+    <Compile Include="Assets\000_Common\004_PersistentDataPath\Proxy\DataObject\PersistentDataPathDataObject.cs" />
+    <Compile Include="Assets\000_Common\004_PersistentDataPath\Proxy\PersistentDataPathProxy.cs" />
+    <Compile Include="Assets\000_Common\005_PlayerPrefs\Proxy\DataObject\PlayerPrefsDataObject.cs" />
+    <Compile Include="Assets\000_Common\005_PlayerPrefs\Proxy\PlayerPrefsProxy.cs" />
+    <Compile Include="Assets\000_Common\006_RESTFul\Proxy\DataObject\RESTFulDataObject.cs" />
+    <Compile Include="Assets\000_Common\006_RESTFul\Proxy\RESTFulProxy.cs" />
+    <Compile Include="Assets\000_Common\007_SmartFox2XClient\Proxy\DataObject\SmartFox2XClientDataObject.cs" />
+    <Compile Include="Assets\000_Common\007_SmartFox2XClient\Proxy\SmartFox2XClientProxy.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\MacroCommand\Init_MacroCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\Init_CheckSettingDataCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\Init_SimpleCommand.cs" />
@@ -102,16 +114,9 @@
     <Compile Include="Assets\001_Init\Scripts\Mediators\Init_TestMediator.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\ViewComponent\InitTestView.cs" />
     <Compile Include="Assets\001_Init\Scripts\Mediators\ViewComponent\InitView.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\PersistentDataPathDataObject.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\PlayerPrefsDataObject.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\RESTFulTestDataObject.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\DataObject\SmartFox2XClientDataObject.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\Init_PersistentDataPathProxy.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\Init_PlayerPrefsProxy.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\Init_RESTFulTestProxy.cs" />
-    <Compile Include="Assets\001_Init\Scripts\Proxy\Init_SmartFox2XClientProxy.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_FBLogoutCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_InitCommnad.cs" />
+    <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_InitialSmartFox2XClientCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_REQ_FBLoginCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_REQ_QuickLoginCommnad.cs" />
     <Compile Include="Assets\002_Login\Scripts\Command\SimpleCommand\Login_REQ_TokenLoginCommnad.cs" />

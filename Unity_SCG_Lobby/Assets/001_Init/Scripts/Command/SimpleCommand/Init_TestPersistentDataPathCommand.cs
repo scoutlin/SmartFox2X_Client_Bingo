@@ -7,17 +7,17 @@ using UnityEngine;
 using BingoFacadeNamespace;
 using DefineNamespace;
 
-namespace InitNamespace
+namespace PersistentDataPathNamespace
 {
     public class Init_TestPersistentDataPathCommand : SimpleCommand, ICommand
     {
-        private Init_PersistentDataPathProxy mInit_PersistentDataPathProxy;
+        private PersistentDataPathProxy mInit_PersistentDataPathProxy;
 
         public override void Execute(INotification notification)
         {
             string token = string.Empty;
 
-            mInit_PersistentDataPathProxy = (Init_PersistentDataPathProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.Init_PersistentDataPathProxy);
+            mInit_PersistentDataPathProxy = (PersistentDataPathProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.PersistentDataPathProxy);
 
             PersistentDataPathDataObject.InitSettingData mInitSettingData = new PersistentDataPathDataObject.InitSettingData();
 
