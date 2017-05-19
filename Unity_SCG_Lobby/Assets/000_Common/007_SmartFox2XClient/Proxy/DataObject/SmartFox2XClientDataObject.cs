@@ -64,7 +64,7 @@ namespace SmartFox2XClientNamespace
 
         #region SCG
         private string SCG_Host = "localhost";       // Default host
-        private string SCG_Zone = "brbingo";   // Default zone
+        private string SCG_Zone = "BasicExamples";   // Default zone
         private string SCG_Room = "The Lobby";
         private int SCG_TcpPort = 9933;              // Default TCP port
         private int SCG_WsPort = 8888;               // Default WebSocket port
@@ -137,6 +137,11 @@ namespace SmartFox2XClientNamespace
             smartFox.AddEventListener(SFSEvent.USER_EXIT_ROOM, OnUserExitRoom);
             smartFox.AddEventListener(SFSEvent.USER_COUNT_CHANGE, OnUserCountChange);
             smartFox.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
+        }
+
+        public bool GetIsConnected()
+        {
+            return smartFox.IsConnected;
         }
 
         public bool Connect()
@@ -286,11 +291,12 @@ namespace SmartFox2XClientNamespace
         }
 
         #region Lobby
-        public void Login()
+        public void Login(string serverToken, string fbToken)
         {
             Debug.Log("SFS Logining...");
             ISFSObject loginInData = SFSObject.NewInstance();
-            loginInData.PutText(KEY_GN, GAMENAME);
+            loginInData.PutText("serverToken", serverToken);
+            loginInData.PutText("fbToken", fbToken);
             //smartFox.Send(new Sfs2X.Requests.LoginRequest("", "", smartFox.getCurrentZone(), loginInData));
             smartFox.Send(new Sfs2X.Requests.LoginRequest("", "", smartFox.CurrentZone, loginInData));
         }
@@ -576,7 +582,7 @@ namespace SmartFox2XClientNamespace
             lock (lockOfSendExtensionQueue)
             {
                 ISFSObject mSFSObject = new SFSObject();
-                mSFSObject.PutText("data", json);
+                mSFSObject.PutText("json", json);
 
                 SendExtensionPacketStruct mSendPacketStruct = new SendExtensionPacketStruct();
                 mSendPacketStruct.cmd = cmd;

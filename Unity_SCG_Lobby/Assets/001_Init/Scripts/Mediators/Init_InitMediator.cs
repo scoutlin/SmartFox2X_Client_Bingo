@@ -7,7 +7,7 @@ using PureMVC.Patterns;
 
 using DefineNamespace;
 
-namespace PersistentDataPathNamespace
+namespace InitNamespace
 {
     public class Init_InitMediator : Mediator, IMediator
     {

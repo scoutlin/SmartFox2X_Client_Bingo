@@ -8,12 +8,16 @@ using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using DefineNamespace;
+using System;
 
 namespace SmartFox2XClientNamespace
 {
     public class SmartFox2XClientProxy : Proxy, IProxy
     {
         private SmartFox2XClientDataObject mSmartFox2XClientDataObject;
+
+        private string loginType;
 
         public SmartFox2XClientProxy(string name) : base(name, new SmartFox2XClientDataObject())
         {
@@ -52,6 +56,21 @@ namespace SmartFox2XClientNamespace
             return rt;
         }
 
+        public bool GetIsConnected()
+        {
+            return mSmartFox2XClientDataObject.GetIsConnected();
+        }
+
+        public string GetLoginType()
+        {
+            return loginType;
+        }
+
+        public void SetLoginType(string loginType)
+        {
+            this.loginType = loginType;
+        }
+
         public bool Connect()
         {
             bool rt = false; 
@@ -74,6 +93,34 @@ namespace SmartFox2XClientNamespace
             {
                 Debug.Log("Connection failed; is the server running at all?");
             }
+
+            //Three type Login Select
+            switch(loginType)
+            {
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+                    break;
+
+                case "Quick":
+                    {
+                        SendNotification(Define.Command.Login_REQ_QuickLoginCommnad);
+                    }
+                    break;
+
+                case "FB":
+                    {
+                        SendNotification(Define.Command.Login_REQ_FBLoginCommnad);
+                    }
+                    break;
+
+                case "Token":
+                    {
+                        SendNotification(Define.Command.Login_REQ_TokenLoginCommand);
+                    }
+                    break;
+            }         
         }
 
         public void OnConnectionLost(string reason)
@@ -81,14 +128,48 @@ namespace SmartFox2XClientNamespace
             Debug.Log("Connection was lost; reason is: " + reason);
         }
 
-        public void Login()
+        public void Disconnect()
         {
-            mSmartFox2XClientDataObject.Login();
+            mSmartFox2XClientDataObject.Disconnect();
+        }
+
+        public void Login(string serverToken, string fbToken)
+        {
+            mSmartFox2XClientDataObject.Login(serverToken, fbToken);
         }
 
         public void OnLogin(string msg)
         {
             Debug.Log("OnLogin - msg: " + msg);
+            Debug.Log("Login Type: " + loginType);
+
+            //Three type Login Select
+            switch (loginType)
+            {
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+                    break;
+
+                case "Quick":
+                    {
+                        SendNotification(Define.Command.Login_RESP_QuickLoginCommnad);
+                    }
+                    break;
+
+                case "FB":
+                    {
+                        SendNotification(Define.Command.Login_RESP_FBLoginCommnad);
+                    }
+                    break;
+
+                case "Token":
+                    {
+                        SendNotification(Define.Command.Login_RESP_TokenLoginCommand);
+                    }
+                    break;
+            }
         }
 
         public void OnLoginError(string errorMessage)

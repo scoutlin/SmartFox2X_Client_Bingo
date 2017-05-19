@@ -103,6 +103,8 @@
     <Compile Include="Assets\000_Common\006_RESTFul\Proxy\RESTFulProxy.cs" />
     <Compile Include="Assets\000_Common\007_SmartFox2XClient\Proxy\DataObject\SmartFox2XClientDataObject.cs" />
     <Compile Include="Assets\000_Common\007_SmartFox2XClient\Proxy\SmartFox2XClientProxy.cs" />
+    <Compile Include="Assets\000_Common\008_FBClientAPI\Proxy\DataObject\FBClientDataObject.cs" />
+    <Compile Include="Assets\000_Common\008_FBClientAPI\Proxy\FBClientProxy.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\MacroCommand\Init_MacroCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\Init_CheckSettingDataCommand.cs" />
     <Compile Include="Assets\001_Init\Scripts\Command\SimpleCommand\Init_SimpleCommand.cs" />

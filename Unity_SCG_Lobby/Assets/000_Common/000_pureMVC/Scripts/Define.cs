@@ -42,6 +42,7 @@
             public const string RESTFulProxy = "RESTFulProxy";
             public const string SmartFox2XClientProxy = "SmartFox2XClientProxy";
             public const string PersistentDataPathProxy = "PersistentDataPathProxy";
+            public const string FBClientProxy = "FBClientProxy";
 
             //Init
 

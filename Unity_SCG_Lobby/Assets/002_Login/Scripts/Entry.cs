@@ -52,6 +52,7 @@ namespace LoginNamespace
             mSmartFox2XClientProxy = (SmartFox2XClientProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.SmartFox2XClientProxy);
             BingoFacade.Instance.SendNotification(Define.Command.Login_InitCommnad);
             Debug.Log("Login_InitCommnad Finished Out");
+
             BingoFacade.Instance.SendNotification(Define.Command.Login_InitialSmartFox2XClientCommnad);
             Debug.Log("Login_InitialSmartFox2XClientCommnad Finished Out");
         }
@@ -70,6 +71,11 @@ namespace LoginNamespace
             {
                 //False
             }
+        }
+
+        void OnApplicationQuit()
+        {
+            mSmartFox2XClientProxy.Disconnect();
         }
     }
 }

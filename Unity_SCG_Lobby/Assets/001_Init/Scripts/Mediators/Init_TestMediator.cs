@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PersistentDataPathNamespace
+namespace InitNamespace
 {
     public class Init_TestMediator : Mediator, IMediator
     {

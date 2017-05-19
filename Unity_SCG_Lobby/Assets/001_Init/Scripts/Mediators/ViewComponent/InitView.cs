@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using DefineNamespace;
 using BingoFacadeNamespace;
 
-namespace PersistentDataPathNamespace
+namespace InitNamespace
 {
     public class InitView : MonoBehaviour
     {

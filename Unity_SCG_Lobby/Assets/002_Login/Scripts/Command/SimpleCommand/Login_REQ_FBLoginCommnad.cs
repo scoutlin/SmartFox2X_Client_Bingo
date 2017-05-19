@@ -8,98 +8,45 @@ using Facebook.Unity;
 
 using LoginNamespace;
 using DefineNamespace;
+using SmartFox2XClientNamespace;
+using BingoFacadeNamespace;
+using FBClientAPINamespace;
 
-public class Login_REQ_FBLoginCommnad : SimpleCommand, ICommand
+namespace LoginNamespace
 {
-    public override void Execute(INotification notification)
+    public class Login_REQ_FBLoginCommnad : SimpleCommand, ICommand
     {
-        FBLogin();
-    }
+        private SmartFox2XClientProxy mSmartFox2XClientProxy;
+        private FBClientProxy mFBClientProxy;
 
-    private void InitCallback()
-    {
-        if (FB.IsInitialized)
+        public override void Execute(INotification notification)
         {
-            // Signal an app activation App Event
-            FB.ActivateApp();
-            // Continue with Facebook SDK
-            // ...
-            var perms = new List<string>() { "public_profile", "email", "user_friends" };
-            FB.LogInWithReadPermissions(perms, AuthCallback);
-        }
-        else
-        {
-            Debug.Log("Failed to Initialize the Facebook SDK");
-        }
-    }
+            mSmartFox2XClientProxy = (SmartFox2XClientProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.SmartFox2XClientProxy);
+            mFBClientProxy = (FBClientProxy)BingoFacade.Instance.RetrieveProxy(Define.Proxy.FBClientProxy);
 
-    private void OnHideUnity(bool isGameShown)
-    {
-        if (!isGameShown)
-        {
-            // Pause the game - we will need to hide
-            Time.timeScale = 0;
-        }
-        else
-        {
-            // Resume the game - we're getting focus again
-            Time.timeScale = 1;
-        }
-    }
-
-    private void AuthCallback(ILoginResult result)
-    {
-        if (FB.IsLoggedIn)
-        {
-            // AccessToken class will have session details
-            var aToken = AccessToken.CurrentAccessToken;
-            // Print current access token's User ID
-            Debug.Log("UserID: " + aToken.UserId);
-            Debug.Log("ExpirationTime: " + aToken.ExpirationTime);
-            Debug.Log("LastRefresh:" + aToken.LastRefresh);
-            Debug.Log("TokenString: " + aToken.TokenString);
-
-            // Print current access token's granted permissions
-            foreach (string perm in aToken.Permissions)
+            //First Check if FB Login
+            if (mFBClientProxy.GetIsLogin() == false)
             {
-                Debug.Log(perm);
+                //Get Token from FB
+                mFBClientProxy.Login();
             }
-
-            FB.API("me/picture?width=200", HttpMethod.GET, delegate (IGraphResult graphResult)
+            else
             {
-                if (string.IsNullOrEmpty(result.Error))
-                {
-                    Debug.Log("received texture with resolution " + graphResult.Texture.width + "x" + graphResult.Texture.height);
 
-                    SendNotification(Define.Notification.Login_FBLoginCompleteNotify, Sprite.Create(graphResult.Texture, new Rect(0, 0, 200, 200), new Vector2(0, 0)));
+                //Second Check is connected with SFS
+                if (mSmartFox2XClientProxy.GetIsConnected() == false)
+                {
+                    //Connect server
+                    mSmartFox2XClientProxy.Connect();
+                    mSmartFox2XClientProxy.SetLoginType("FB");
+                    Debug.Log("Login_REQ_FBLoginCommnad - Execute - mSmartFox2XClientProxy.Login()!!");
                 }
                 else
                 {
-                    Debug.LogWarning("received error=" + result.Error);
+                    //FB Login
+                    mSmartFox2XClientProxy.Login(null, mFBClientProxy.GetFBToken());
                 }
-            });
-        }
-        else
-        {
-            Debug.Log("User cancelled login");
-        }
-    }
-
-    private void FBLogin()
-    {
-        if (!FB.IsInitialized)
-        {
-            // Initialize the Facebook SDK
-            FB.Init(InitCallback, OnHideUnity);
-        }
-        else
-        {
-            // Already initialized, signal an app activation App Event
-            FB.ActivateApp();
-            // Continue with Facebook SDK
-            // ...
-            var perms = new List<string>() { "public_profile", "email", "user_friends" };
-            FB.LogInWithReadPermissions(perms, AuthCallback);
+            }
         }
     }
 }
